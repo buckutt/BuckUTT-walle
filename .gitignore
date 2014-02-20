@@ -1,9 +1,13 @@
-
 # Intranet #
 ############
 
 .idea/
 node_modules/
+
+## PymZoR bullshit ##
+buckutt-wall-e.sublime-project
+buckutt-wall-e.sublime-workspace
+
 
 # Compiled source #
 ###################
