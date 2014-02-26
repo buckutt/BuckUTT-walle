@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="buckutt" ng-controller="AppCtrl">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>BuckUTT</title>
+
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="index.css" />
+        <script src="lib/jquery/jquery-1.10.2.js"></script>
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/angular-ui/angular-ui-router.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/sell/sell.js"></script>
+    </head>
+    <body>
+    <div class="bu-header">
+            <div class="bu-container">
+                <div class="bu-menu">
+                    <div class="bu-menu-item active">
+                        <a href="">Accueil</a>
+                    </div>
+                    <div class="bu-menu-item">
+                        <a href="">Canettes</a>
+                    </div>
+                    <div class="bu-menu-item">
+                        <a href="">Barres</a>
+                    </div>
+                    <div class="bu-menu-item">
+                        <a href="">Boissons</a>
+                    </div>
+                    <div class="bu-menu-item">
+                        <a href="">Encas</a>
+                    </div>
+                    <div class="bu-menu-item">
+                        <a href="">Event</a>
+                    </div>
+                </div>
+                <div class="bu-logout">
+                    <a href="">
+                        <i class="glyphicon glyphicon-off"></i>
+                    </a>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+    </div>
+
+        <div class="bu-content" ui-view="main">
+
+        </div>
+    </body>
+</html>

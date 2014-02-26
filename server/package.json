@@ -1,0 +1,13 @@
+{
+  "name": "buckutt-wall-e",
+  "description": "REST <=> SOAP interface for buckutt client",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Mousset Axel, Soulier Lucas",
+  "dependencies": {
+    "express": "latest",
+    "express-namespace": "0.1.1",
+    "underscore": "latest",
+    "async": "latest"
+  }
+}
