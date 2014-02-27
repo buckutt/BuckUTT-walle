@@ -1,142 +1,119 @@
-            <div class="bu-user">
-                <div class="bu-user-profile">
-                    <div class="bu-user-image">
-                        <img src="assets/img/youenn.png" />
-                    </div>
-                    <div class="bu-user-infos">
-                        <strong class="name">Youenn Piolet</strong><br />
-                        <small class="surname">Secrépute - TC01</small>
-                    </div>
-                </div>
-
-                <div class="bu-user-items">
-                    <div class="bu-user-item">
-                        <div class="bu-user-item-inner">
-                            <div class="item-remove">
-                                <a href="">
-                                    <i class="glyphicon glyphicon-remove"></i>
-                                </a>
-                            </div>
-                            <div class="item-count">
-                                2
-                            </div>
-                            <div class="item-name">
-                                Coca cola
-                            </div>
-                            <div class="item-price">
-                                0.60 €
-                            </div>
-                            <div class="item-edit">
-                                <a href="">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                </a>
-                            </div>
+            <div class="bu-header">
+                <div class="bu-container">
+                    <div class="bu-menu">
+                        <div class="bu-menu-item" ng-class="{active: isActive(category)}" ng-repeat="category in categories">
+                            <a href="" ng-click="switchCategory(category.id)">{{ category.name }}</a>
                         </div>
                     </div>
-
-                    <div class="bu-user-item">
-                        <div class="bu-user-item-inner">
-                            <div class="item-remove">
-                                <a href="">
-                                    <i class="glyphicon glyphicon-remove"></i>
-                                </a>
-                            </div>
-                            <div class="item-count">
-                                1
-                            </div>
-                            <div class="item-name">
-                                Oasis
-                            </div>
-                            <div class="item-price">
-                                0.60 €
-                            </div>
-                            <div class="item-edit">
-                                <a href="">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                </a>
-                            </div>
-                        </div>
+                    <div class="bu-logout">
+                        <a href="">
+                            <i class="glyphicon glyphicon-off"></i>
+                        </a>
                     </div>
 
-                    <div class="bu-user-item">
-                        <div class="bu-user-item-inner">
-                            <div class="item-remove">
-                                <a href="">
-                                    <i class="glyphicon glyphicon-remove"></i>
-                                </a>
-                            </div>
-                            <div class="item-count">
-                                1
-                            </div>
-                            <div class="item-name">
-                                Café
-                            </div>
-                            <div class="item-price">
-                                0.40 €
-                            </div>
-                            <div class="item-edit">
-                                <a href="">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
-            <div class="bu-choices">
-                <a href="" class="bu-choice">
-                    <div class="bu-choice-inner">
-                        <div class="item-icon"><img src="http://siteboz.fr/buck/coca.jpg" alt="Coca cola"></div>
-                        <div class="item-infos">
-                            <div class="item-name">
-                                Coca cola
-                            </div>
-                            <div class="item-price">
-                                0,60 €
-                            </div>
-                        </div>
-                    </div>
-                </a>
 
-                <a href="" class="bu-choice">
-                    <div class="bu-choice-inner">
-                        <div class="item-icon"><img src="http://siteboz.fr/buck/coca.jpg" alt="Coca cola"></div>
-                        <div class="item-infos">
-                            <div class="item-name">
-                                Coca cola
-                            </div>
-                            <div class="item-price">
-                                0,60 €
-                            </div>
+            <div class="bu-content">
+                <div class="bu-user">
+                    <div class="bu-user-profile">
+                        <div class="bu-user-image">
+                            <img src="assets/img/youenn.png" />
+                        </div>
+                        <div class="bu-user-infos">
+                            <strong class="name">Youenn Piolet</strong><br />
+                            <small class="surname">Secrépute - TC01</small>
                         </div>
                     </div>
-                </a>
 
-                <a href="" class="bu-choice">
-                    <div class="bu-choice-inner">
-                        <div class="item-icon"><img src="http://siteboz.fr/buck/coca.jpg" alt="Coca cola"></div>
-                        <div class="item-infos">
-                            <div class="item-name">
-                                Coca cola
-                            </div>
-                            <div class="item-price">
-                                0,60 €
+                    <div class="bu-user-items">
+                        <div class="bu-user-item">
+                            <div class="bu-user-item-inner">
+                                <div class="item-remove">
+                                    <a href="">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </a>
+                                </div>
+                                <div class="item-count">
+                                    2
+                                </div>
+                                <div class="item-name">
+                                    Coca cola
+                                </div>
+                                <div class="item-price">
+                                    0.60 €
+                                </div>
+                                <div class="item-edit">
+                                    <a href="">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
 
-                <a href="" class="bu-choice">
-                    <div class="bu-choice-inner">
-                        <div class="item-icon"><img src="http://siteboz.fr/buck/coca.jpg" alt="Coca cola"></div>
-                        <div class="item-infos">
-                            <div class="item-name">
-                                Coca cola
+                        <div class="bu-user-item">
+                            <div class="bu-user-item-inner">
+                                <div class="item-remove">
+                                    <a href="">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </a>
+                                </div>
+                                <div class="item-count">
+                                    1
+                                </div>
+                                <div class="item-name">
+                                    Oasis
+                                </div>
+                                <div class="item-price">
+                                    0.60 €
+                                </div>
+                                <div class="item-edit">
+                                    <a href="">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="item-price">
-                                0,60 €
+                        </div>
+
+                        <div class="bu-user-item">
+                            <div class="bu-user-item-inner">
+                                <div class="item-remove">
+                                    <a href="">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </a>
+                                </div>
+                                <div class="item-count">
+                                    1
+                                </div>
+                                <div class="item-name">
+                                    Café
+                                </div>
+                                <div class="item-price">
+                                    0.40 €
+                                </div>
+                                <div class="item-edit">
+                                    <a href="">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
+                <div class="bu-choices">
+                    <a href="" class="bu-choice" ng-click="addProduct(product)"  ng-repeat="product in actualProducts">
+                        <div class="bu-choice-inner">
+                            <div class="item-icon"><img src="http://siteboz.fr/buck/coca.jpg" alt="Coca cola"></div>
+                            <div class="item-infos">
+                                <div class="item-name">
+                                    {{ product.name }}
+                                </div>
+                                <div class="item-price">
+                                    {{ product.price }} €
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
