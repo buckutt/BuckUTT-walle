@@ -5,9 +5,6 @@
   "private": true,
   "author": "Mousset Axel, Soulier Lucas",
   "dependencies": {
-    "express": "latest",
-    "express-namespace": "0.1.1",
-    "underscore": "latest",
-    "async": "latest"
+    "express": "latest"
   }
 }
