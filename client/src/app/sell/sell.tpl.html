@@ -27,22 +27,22 @@
                         </div>
                     </div>
 
-                    <div class="bu-user-items">
+                    <div class="bu-user-items" ng-repeat="item in cart">
                         <div class="bu-user-item">
                             <div class="bu-user-item-inner">
                                 <div class="item-remove">
-                                    <a href="">
+                                    <a href="" ng-click="deleteProduct(item)">
                                         <i class="glyphicon glyphicon-remove"></i>
                                     </a>
                                 </div>
                                 <div class="item-count">
-                                    2
+                                    {{ item.quantity }}
                                 </div>
                                 <div class="item-name">
-                                    Coca cola
+                                    {{ item.product.name }}
                                 </div>
                                 <div class="item-price">
-                                    0.60 €
+                                    {{ (item.quantity*item.product.price).toFixed(2) }} €
                                 </div>
                                 <div class="item-edit">
                                     <a href="">
@@ -52,53 +52,6 @@
                             </div>
                         </div>
 
-                        <div class="bu-user-item">
-                            <div class="bu-user-item-inner">
-                                <div class="item-remove">
-                                    <a href="">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </a>
-                                </div>
-                                <div class="item-count">
-                                    1
-                                </div>
-                                <div class="item-name">
-                                    Oasis
-                                </div>
-                                <div class="item-price">
-                                    0.60 €
-                                </div>
-                                <div class="item-edit">
-                                    <a href="">
-                                        <i class="glyphicon glyphicon-pencil"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bu-user-item">
-                            <div class="bu-user-item-inner">
-                                <div class="item-remove">
-                                    <a href="">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </a>
-                                </div>
-                                <div class="item-count">
-                                    1
-                                </div>
-                                <div class="item-name">
-                                    Café
-                                </div>
-                                <div class="item-price">
-                                    0.40 €
-                                </div>
-                                <div class="item-edit">
-                                    <a href="">
-                                        <i class="glyphicon glyphicon-pencil"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="bu-choices">
