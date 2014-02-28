@@ -1,21 +1,35 @@
 angular.module('buckutt.sell', [
-  'ui.router'
-])
+        'ui.router'
+    ])
 
-.config(function config($stateProvider) {
-  $stateProvider.state( 'sell', {
-    url: '/sell',
-    views: {
-      "main": {
-        controller: 'SellCtrl',
-        templateUrl: 'app/sell/sell.tpl.html'
-      }
-    },
-    data:{ pageTitle: 'Vente' }
-  });
-})
+    .config(function config($stateProvider) {
+        $stateProvider.state( 'sell', {
+            url: '/sell',
+            views: {
+                "main": {
+                    controller: 'SellCtrl',
+                    templateUrl: 'app/sell/sell.tpl.html'
+                }
+            },
+            data:{ pageTitle: 'Vente' }
+        })
+        .state( 'sell.calculator', {
+            url: '/calculator',
+            views: {
+                "main": {
+                    controller: 'CalculatorCtrl',
+                    templateUrl: 'app/sell/calculator.tpl.html'
+                }
+            },
+            data:{ pageTitle: 'Calculatrice' }
+        })
+    })
 
-.controller('SellCtrl', function SellCtrl($scope) {
+    .controller('CalculatorCtrl', function CalculatorCtrl($scope) {
+        $scope.test = 'test1';
+    })
+
+    .controller('SellCtrl', function SellCtrl($scope) {
 
         $scope.categories = [
             {
@@ -100,6 +114,6 @@ angular.module('buckutt.sell', [
             $scope.cart = cart;
         };
 
-})
+    })
 
 ;
