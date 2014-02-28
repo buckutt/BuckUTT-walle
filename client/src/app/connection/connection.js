@@ -37,6 +37,10 @@ angular.module('buckutt.connection', [
             cardId = $scope.cardId;
             $scope.cardId = '';
         };
+
+        $scope.focusOnInput = function () {
+            $("#cardId").focus();
+        };
     })
 
 ;
