@@ -1,10 +1,11 @@
 angular.module('buckutt', [
   'ui.router',
-  'buckutt.sell'
+  'buckutt.sell',
+  'buckutt.connection'
 ])
 
 .config(function myAppConfig($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('');
+  $urlRouterProvider.otherwise('connection');
 })
 
 .run(function run () {
