@@ -14,43 +14,8 @@
         <script src="lib/angular-ui/angular-ui-router.js"></script>
         <script src="app/app.js"></script>
         <script src="app/sell/sell.js"></script>
-        <script src="app/connection/connection.js"></script>
     </head>
-    <body>
-    <div class="bu-header">
-            <div class="bu-container">
-                <div class="bu-menu">
-                    <div class="bu-menu-item active">
-                        <a href="">Accueil</a>
-                    </div>
-                    <div class="bu-menu-item">
-                        <a href="">Canettes</a>
-                    </div>
-                    <div class="bu-menu-item">
-                        <a href="">Barres</a>
-                    </div>
-                    <div class="bu-menu-item">
-                        <a href="">Boissons</a>
-                    </div>
-                    <div class="bu-menu-item">
-                        <a href="">Encas</a>
-                    </div>
-                    <div class="bu-menu-item">
-                        <a href="">Event</a>
-                    </div>
-                </div>
-                <div class="bu-logout">
-                    <a href="">
-                        <i class="glyphicon glyphicon-off"></i>
-                    </a>
-                </div>
+    <body ui-view="main">
 
-                <div class="clearfix"></div>
-            </div>
-    </div>
-
-        <div class="bu-content" ui-view="main">
-
-        </div>
     </body>
 </html>
