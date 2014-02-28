@@ -5,6 +5,7 @@
   "private": true,
   "author": "Mousset Axel, Soulier Lucas",
   "dependencies": {
-    "express": "latest"
+    "express": "latest",
+    "node-mysql": "latest"
   }
 }
