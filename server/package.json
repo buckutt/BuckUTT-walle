@@ -1,11 +1,12 @@
 {
   "name": "buckutt-wall-e",
-  "description": "REST <=> SOAP interface for buckutt client",
+  "description": "Buckutt remade",
   "version": "1.0.0",
   "private": true,
   "author": "Mousset Axel, Soulier Lucas",
   "dependencies": {
     "express": "latest",
-    "node-mysql": "latest"
+    "node-mysql": "latest",
+    "async": "latest"
   }
 }
