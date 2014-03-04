@@ -1,2 +1,2 @@
 run:
-	node server/app/app.js
+	nodemon server/app/app.js

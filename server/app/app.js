@@ -7,7 +7,7 @@ var fs = require('fs');
 //Load config
 var config = JSON.parse(fs.readFileSync("./server/config.json"));
 
-
+//Test
 //Mysql connection
 var dbConnection = mysql.createConnection({
   host: config.mysql.host,

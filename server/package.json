@@ -7,6 +7,7 @@
   "dependencies": {
     "express": "latest",
     "node-mysql": "latest",
-    "async": "latest"
+    "async": "latest",
+    "nodemon": "latest"
   }
 }

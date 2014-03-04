@@ -1,5 +1,6 @@
 angular.module('buckutt.sell', [
-        'ui.router'
+        'ui.router',
+        'buckutt.sell.calculator'
     ])
 
     .config(function config($stateProvider) {
@@ -13,20 +14,6 @@ angular.module('buckutt.sell', [
             },
             data:{ pageTitle: 'Vente' }
         })
-        .state( 'sell.calculator', {
-            url: '/calculator',
-            views: {
-                "main": {
-                    controller: 'CalculatorCtrl',
-                    templateUrl: 'app/sell/calculator.tpl.html'
-                }
-            },
-            data:{ pageTitle: 'Calculatrice' }
-        })
-    })
-
-    .controller('CalculatorCtrl', function CalculatorCtrl($scope) {
-        $scope.test = 'test1';
     })
 
     .controller('SellCtrl', function SellCtrl($scope) {

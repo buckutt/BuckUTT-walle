@@ -88,6 +88,9 @@ users.checkRights = function(userId, rightId, point_id, fun_id){
 
 
 users.users = function(app, dbConnection){
+	//instanciate children first
+	users.login = require("./login/login.js").login(app, users);
+
 	/*
 		Get user info 
 		Return useful user info
@@ -106,7 +109,10 @@ users.users = function(app, dbConnection){
 				dbConnection.query(query, params, function(err, rows, fields){
 					if (err) throw err;
 					if (rows.length > 1) console.log("ERROR api/users multiple entry for params:"+params);
-
+					if (rows.length < 1){
+						error = {error: "No entry"};
+						callback(true);
+					} 
 					var user_id = rows[0].usr_id
 
 					if (users.getUserById(user_id) != null){
@@ -164,29 +170,6 @@ users.users = function(app, dbConnection){
 
 			}
 		], function() { if(error) res.json(error); });  //Execute only if callback(true) is called, break the chain
-	})
-
-
-	/*
-		Check user PIN
-	*/
-	.get("/api/users/login/id=:id&pwd=:pwd", function(req, res){
-		var status = {logged: false};
-
-		var user = users.getUserById(req.params.id);
-
-		if (user != null){
-			//TODO hash password
-			if (user.password == req.params.pwd){
-				user.logged = true;
-				status.logged = true;
-			}
-			res.json(status);
-		}
-		else{
-			//Not swiped
-			res.json({error: "User not registered"});
-		}
 	})
 
 	;
