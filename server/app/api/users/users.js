@@ -32,7 +32,7 @@ users.getUserById = function(id){
 	14: group editor
 	15: manual mode
 */
-users.checkRights = function(userId, rightId, point_id, fun_id){
+users.checkRights = function(userId, right_id, point_id, fun_id){
 	if (!point_id) point_id = 0;
 	if (!fun_id) fun_id = 0;
 
@@ -45,7 +45,7 @@ users.checkRights = function(userId, rightId, point_id, fun_id){
 
 	user.rights.filter(function(right){
 		if ((point_id) && (fun_id)){
-			if ((right.fun_id == fun_id) && (right.poi_id == point_id) && (right.rig_id == rightId)){
+			if ((right.fun_id == fun_id) && (right.poi_id == point_id) && (right.rig_id == right_id)){
 				data.hasRight = true;
 
 				if (right.rig_admin){
@@ -55,7 +55,7 @@ users.checkRights = function(userId, rightId, point_id, fun_id){
 
 		}
 		else if (point_id){
-			if ((right.fun_id == fun_id) && (right.rig_id == rightId)){
+			if ((right.poi_id == point_id) && (right.rig_id == right_id)){
 				data.hasRight = true;
 
 				if (right.rig_admin){
@@ -64,7 +64,7 @@ users.checkRights = function(userId, rightId, point_id, fun_id){
 			}
 		}
 		else if (fun_id){
-			if ((right.fun_id == fun_id) && (right.rig_id == rightId)){
+			if ((right.fun_id == fun_id) && (right.rig_id == right_id)){
 				data.hasRight = true;
 
 				if (right.rig_admin){
@@ -73,7 +73,7 @@ users.checkRights = function(userId, rightId, point_id, fun_id){
 			}
 		}
 		else{
-			if (right.rig_id == rightId){
+			if (right.rig_id == right_id){
 				data.hasRight = true;
 
 				if (right.rig_admin){
@@ -117,8 +117,9 @@ users.users = function(app, dbConnection){
 
 					if (users.getUserById(user_id) != null){
 						//Already swiped, go to end of waterfall with error
-						error = {error: "User has already swiped"};
-						callback(true);
+					// Disabled for developpement phase
+					//	error = {error: "User has already swiped"};
+					//	callback(true);
 					}
 
 					callback(null, user_id);
@@ -161,9 +162,18 @@ users.users = function(app, dbConnection){
 						point_id: req.params.point_id,
 						logged: false
 					};		
-
 					users.userlist.push(user);
-					res.json(user);		
+
+					res.json({
+						id: user_id,
+						firstname: data.usr_firstname,
+						lastname: data.usr_lastname,
+						nickname: data.usr_nickname,
+						credit: data.usr_credit,
+						img_id: data.img_id,
+						rights: rights
+					});		
+
 					callback(null);
 				});
 
