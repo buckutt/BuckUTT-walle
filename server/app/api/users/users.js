@@ -97,7 +97,7 @@ users.users = function(app, dbConnection){
 		Check and return selling right
 	*/
 
-	app.get("/api/users/data=:data&meanOfLogin=:meanOfLogin", function(req, res){
+	app.get("/api/users/data=:data&meanOfLogin=:meanOfLogin&point_id=:point_id", function(req, res){
 		var error = null;
 		//You MUST see async api.
 		async.waterfall([
