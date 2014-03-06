@@ -1,0 +1,11 @@
+//Rename to config.json
+
+{
+    "mysql": {
+        "host": "",
+        "port": 0,
+        "user": "",
+        "password": "",
+        "database": ""
+    }
+}
