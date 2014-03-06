@@ -111,6 +111,7 @@ users.users = function(app, dbConnection){
 					if (rows.length < 1){
 						error = {error: "No entry"};
 						callback(true);
+						return;
 					} 
 					var user_id = rows[0].usr_id
 
