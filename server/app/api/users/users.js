@@ -97,9 +97,8 @@ users.users = function(app, dbConnection){
 		Check and return selling right
 	*/
 
-	app.get("/api/users/data=:data&meanOfLogin=:meanOfLogin&point_id=:point_id", function(req, res){
+	app.get("/api/users/data=:data&meanOfLogin=:meanOfLogin", function(req, res){
 		var error = null;
-
 		//You MUST see async api.
 		async.waterfall([
 			function(callback){
@@ -147,8 +146,8 @@ users.users = function(app, dbConnection){
 					var data = rows[0];
 					var user = {
 						id: user_id,
-						password: data.usr_pwd,
-						firstname: data.usr_firstname,
+						password: data.usr_pwd
+,						firstname: data.usr_firstname,
 						lastname: data.usr_lastname,
 						nickname: data.usr_nickname,
 						mail: data.usr_mail,
