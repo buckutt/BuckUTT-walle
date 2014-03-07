@@ -45,7 +45,7 @@ products.products = function(app, dbConnection){
 
                 var params = [req.params.point_id, periods, req.params.buyer_id, periods, 
                     periods, periods, req.params.point_id, req.params.seller_id];
-                console.log(params);
+
                 dbConnection.query(query, params, function(err, rows, fields){
                     if (err) throw err;
                     res.json(rows);
