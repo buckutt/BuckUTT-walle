@@ -1,0 +1,67 @@
+.bu-pin {
+	width:100%;
+	height:100%;
+}
+
+.bu-pin-container {
+	width:800px;
+	margin:auto;
+	padding-top:50px;
+	text-align:center;
+	font-weight:bold;
+	font-size:20px;
+}
+
+.bu-pin-digit {
+	width:350px;
+	background: #d5d5d5;
+	float:left;
+	margin-left:100px;
+}
+
+.bu-pin-digit #userPin {
+	width:100%;
+	height:30px;
+	font-size:30px;
+	font-weight:bold;
+	background:transparent;
+	border:0;
+	letter-spacing:5px;
+	text-align:center;
+}
+
+.bu-pin-digit td {
+	height:60px;
+	text-align:center;
+	font-weight:bold;
+	font-size:30px;
+	border: 1px solid #7D8987;
+}
+
+.bu-pin-digit-red {
+	background:#8A0808;
+	color:white;
+}
+
+.bu-pin-digit-green {
+	background:#01DF01;
+	color:white;
+}
+
+.bu-pin-left {
+	float:left;
+	text-align:center;
+	font-weight:bold;
+	font-size:16px;
+	width:350px;
+}
+
+.bu-pin-left img {
+	width:150px;
+	height:150px;
+}
+
+.bu-pin-error {
+	color:red;
+	font-size:14px;
+}

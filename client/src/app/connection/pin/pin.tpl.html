@@ -1,0 +1,33 @@
+<div class="bu-pin" ng-click="focusOnInput()">
+	<div class="bu-pin-container">
+		Rentre ton code PIN !<br />
+		<span class="bu-pin-error">{{ error }}</span><br />
+
+		<div class="bu-pin-left">
+			<img src="assets/img/youenn.png" /><br />
+			{{ seller.firstname }} {{ seller.lastname }}
+		</div>
+
+		<table class="bu-pin-digit">
+			<tr>
+				<th colspan="3">
+				    <form>
+				        <input type="password" maxlength="4" ng-enter="pressEnter()" ng-model="userPin" id="userPin"/>
+				    </form>
+		    	</th>
+		    </tr>
+		    <tr>
+		    	<td ng-click="changeUserPin(1)">1</td><td ng-click="changeUserPin(2)">2</td><td ng-click="changeUserPin(3)">3</td>
+		    </tr>
+		    <tr>
+		    	<td ng-click="changeUserPin(4)">4</td><td ng-click="changeUserPin(5)">5</td><td ng-click="changeUserPin(6)">6</td>
+		    </tr>
+		    <tr>
+		    	<td ng-click="changeUserPin(7)">7</td><td ng-click="changeUserPin(8)">8</td><td ng-click="changeUserPin(9)">9</td>
+		    </tr>
+		    <tr>
+		    	<td class="bu-pin-digit-red" ng-click="changeUserPin('x')">x</td><td ng-click="changeUserPin(0)">0</td><td class="bu-pin-digit-green" ng-click="sendUserPin()">v</td>
+		    </tr>
+		</table>
+	</div>
+</div>
