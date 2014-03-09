@@ -48,7 +48,7 @@ angular.module('buckutt.connection.status', [
                     $rootScope.isAdmin = false;
                     $rootScope.isReloader = false;
                     $rootScope.isLogged = false;
-                    $rootScope.sellerId = seller.id;
+                    $rootScope.seller = seller;
 
                     for(var key in seller.rights) {
                         if(seller.rights[key].poi_id == $cookieStore.get("pointId") && seller.rights[key].rig_id == 11) $rootScope.isSeller = true;
