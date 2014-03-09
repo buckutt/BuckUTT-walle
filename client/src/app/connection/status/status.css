@@ -1,0 +1,22 @@
+#cardId {
+    opacity:0;
+}
+
+.bu-status {
+	width:100%;
+	height:100%;
+	text-align:center;
+	font-size:24px;
+	font-weight:bold;
+}
+
+.bu-status-error {
+	color:red;
+	padding-top:50px;
+	font-size:18px;
+	height:18px;
+}
+
+.bu-status-waiter {
+	padding-top:40px;
+}
