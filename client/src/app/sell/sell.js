@@ -1,6 +1,5 @@
 angular.module('buckutt.sell', [
-        'ui.router',
-        'buckutt.sell.calculator'
+        'ui.router'
     ])
 
     .config(function config($stateProvider) {
