@@ -1,0 +1,16 @@
+<div class="bu-waiter" ng-click="focusOnInput()">
+    <div class="bu-waiter-header">
+        <div class="bu-waiter-logout">
+            <a href="">
+                <i class="glyphicon glyphicon-off"></i>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+	<div class="bu-waiter-error">{{ error }}</div>
+	<div class="bu-waiter-waiter">En attente d'une carte étu !</div>
+    <form>
+        <input type="text" ng-enter="pressEnter()" ng-model="cardId" id="cardId"/>
+    </form>
+</div>

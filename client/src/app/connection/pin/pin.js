@@ -21,6 +21,7 @@ angular.module('buckutt.connection.pin', [
 
     .controller('PinCtrl', function PinCtrl($scope, $rootScope, $stateParams, $cookieStore, $state, Sellers) {
         if($rootScope.seller == undefined) $state.transitionTo('connection.status', {error:1});
+        if($rootScope.seller && $rootScope.isLogged) $state.transitionTo('sell.waiter');
 
         var errors = ['','Erreur : Le code PIN est faux.'];
         
@@ -40,7 +41,7 @@ angular.module('buckutt.connection.pin', [
             logged = Sellers.get({id:$scope.seller.id, pwd: CryptoJS.MD5($scope.userPin)}, function(){
                 if(logged.logged) {
                     $rootScope.isLogged = true;
-                    // TO DO : redirection vers l'attente d'un client
+                    $state.transitionTo("sell.waiter");
                 } else {
                     $scope.userPin = '';
                     $scope.error = errors[1];
