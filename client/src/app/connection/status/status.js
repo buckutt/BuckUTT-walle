@@ -18,7 +18,7 @@ angular.module('buckutt.connection.status', [
 
     .directive('ngEnter', function () {
         return function (scope, element, attrs) {
-            element.bind("keydown", function (event) {
+            element.bind("keypress", function (event) {
                 if(event.which === 13) {
                     scope.$apply(function (){
                         scope.$eval(attrs.ngEnter);
@@ -35,13 +35,14 @@ angular.module('buckutt.connection.status', [
     })
 
     .controller('StatusCtrl', function StatusCtrl($scope, $rootScope, $state, $stateParams, $cookieStore, Users) {
+        if($rootScope.seller && $rootScope.isLogged) $state.transitionTo('sell.waiter');
         $cookieStore.put("pointId",3);
         $("#cardId").focus();
         var seller = undefined;
-        var errors = ['','Erreur : L\'utilisateur n\'existe pas.','Erreur : Pas d\'accès vendeur pour ce point.'];
+        var errors = ['','Erreur : L\'utilisateur n\'existe pas.','Erreur : Pas d\'accès vendeur pour ce point.', 'Erreur : Pas de vendeur connecté.'];
 
         $scope.pressEnter = function() {
-            seller = Users.get({data: "user"+$scope.cardId, mol: "1", point_id: $cookieStore.get("pointId")}, function(){
+            seller = Users.get({data: $scope.cardId, mol: "4", point_id: $cookieStore.get("pointId")}, function(){
                 if(seller.error) displayError(1);
                 else {
                     $rootScope.isSeller = false;
