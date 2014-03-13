@@ -15,7 +15,11 @@ angular.module('buckutt.sell.interface', [
         })
     })
 
-    .controller('InterfaceCtrl', function InterfaceCtrl($scope, $state, $rootScope) {
+    .factory('Purchases', function($resource) {
+        return $resource('/api/purchases');
+    })
+
+    .controller('InterfaceCtrl', function InterfaceCtrl($scope, $state, $rootScope, Purchases) {
         if(!$rootScope.isSeller || !$rootScope.isLogged) $state.transitionTo('connection.status', {error:3});
         if(!$rootScope.buyer) $state.transitionTo('sell.waiter', {error:1});
 
@@ -101,6 +105,12 @@ angular.module('buckutt.sell.interface', [
             }
             $scope.cart = cart;
         };
+
+        $scope.sendPurchases = function() {
+            var newPurchases = new Purchases();
+            newPurchases.products = $scope.cart;
+            newPurchases.$save();
+        }
 
     })
 

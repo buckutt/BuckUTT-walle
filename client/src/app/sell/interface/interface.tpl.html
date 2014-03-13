@@ -23,35 +23,41 @@
                         </div>
                         <div class="bu-user-infos">
                             <strong class="name">Youenn Piolet</strong><br />
-                            <small class="surname">Secrépute - TC01</small>
+                            <small class="surname">Secrépute - TC01</small><br />
+                            <small class="sold">4.00 €</small>
                         </div>
                     </div>
 
-                    <div class="bu-user-items" ng-repeat="item in cart">
-                        <div class="bu-user-item">
-                            <div class="bu-user-item-inner">
-                                <div class="item-remove">
-                                    <a href="" ng-click="deleteProduct(item)">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </a>
-                                </div>
-                                <div class="item-count">
-                                    {{ item.quantity }}
-                                </div>
-                                <div class="item-name">
-                                    {{ item.product.name }}
-                                </div>
-                                <div class="item-price">
-                                    {{ (item.quantity*item.product.price).toFixed(2) }} €
-                                </div>
-                                <div class="item-edit">
-                                    <a href="">
-                                        <i class="glyphicon glyphicon-pencil"></i>
-                                    </a>
+                    <div class="bu-user-items-container">
+                        <div class="bu-user-items" ng-repeat="item in cart">
+                            <div class="bu-user-item">
+                                <div class="bu-user-item-inner">
+                                    <div class="item-remove">
+                                        <a href="" ng-click="deleteProduct(item)">
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </a>
+                                    </div>
+                                    <div class="item-count">
+                                        {{ item.quantity }}
+                                    </div>
+                                    <div class="item-name">
+                                        {{ item.product.name }}
+                                    </div>
+                                    <div class="item-price">
+                                        {{ (item.quantity*item.product.price).toFixed(2) }} €
+                                    </div>
+                                    <div class="item-edit">
+                                        <a href="">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
+                    </div>
+                    <div class="bu-choice-purchase">
+                        <a href="" ng-click="sendPurchases()"></a>
                     </div>
                 </div>
                 <div class="bu-choices">
