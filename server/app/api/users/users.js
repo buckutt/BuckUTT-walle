@@ -4,7 +4,7 @@ var users = module.exports;
 
 users.userlist = [];
 
-
+//TODO: Dunno if filter is relevant in those cases.. gotta check it out
 users.getUserById = function(id){
 	var user = null;
 
@@ -91,6 +91,15 @@ users.users = function(app, dbConnection){
 	//instanciate children first
 	users.login = require("./login/login.js").login(app, users);
 
+	//Remove users from userlist every 180sec
+	setInterval(function(){
+		users.userlist.forEach(function(user, index){
+			if ((user.login_time + 180000) >= new Date().getTime()){
+				users.userlist.splice(index, 1);
+			}
+		});
+	}, 180000);
+
 	/*
 		Get user info 
 		Return useful user info
@@ -160,7 +169,8 @@ users.users = function(app, dbConnection){
 						fail_auth: data.usr_fail_auth,
 						blocked: data.usr_blocked,
 						point_id: req.params.point_id,
-						logged: false
+						logged: false,
+						login_time: new Date().getTime()
 					};		
 					users.userlist.push(user);
 
