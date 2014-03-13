@@ -88,13 +88,14 @@ users.checkRights = function(userId, right_id, point_id, fun_id){
 
 
 users.users = function(app, dbConnection){
-	//instanciate children first
-	users.login = require("./login/login.js").login(app, users);
+	//instanciate children routes first
+	users.login = require("./log/routes.js")(app, users);
 
 	//Remove users from userlist every 180sec
 	setInterval(function(){
 		users.userlist.forEach(function(user, index){
-			if ((user.login_time + 180000) >= new Date().getTime()){
+			//TODO autodisconnect for logged user
+			if (((user.login_time + 180000) >= new Date().getTime()) && (user.logged == false)){
 				users.userlist.splice(index, 1);
 			}
 		});
