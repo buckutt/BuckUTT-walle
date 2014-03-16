@@ -162,6 +162,7 @@
     padding: 5px;
     color: #5c5c5c;
     margin: 0 10px 10px 10px;
+    overflow:hidden;
 }
 .bu-choice:hover {
     background: #d5d5d5;
@@ -212,4 +213,8 @@
     height:533px;
     padding-top:10px;
     overflow:hidden;
+}
+
+.bu-credit {
+    font-weight:bold;
 }

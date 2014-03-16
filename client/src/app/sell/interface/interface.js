@@ -69,25 +69,30 @@ angular.module('buckutt.sell.interface', [
             var cart = [];
 
             $scope.addProduct = function(product) {
-                var isFound = false;
-                for(item in cart) {
-                    if(cart[item].product.obj_id == product.obj_id) {
-                        cart[item].quantity++;
-                        isFound = true;
+                if(product.price > $scope.buyer.credit) {
+                    alert('No');
+                } else {
+                    var isFound = false;
+                    for(item in cart) {
+                        if(cart[item].product.obj_id == product.obj_id) {
+                            cart[item].quantity++;
+                            isFound = true;
+                        }
                     }
+                    if(!isFound) {
+                        cart.push({
+                            "product":product,
+                            "quantity":1
+                        });
+                    }
+                    $scope.buyer.credit -= product.price;
+                    $scope.cart = cart;
                 }
-                if(!isFound) {
-                    cart.push({
-                        "product":product,
-                        "quantity":1
-                    });
-                }
-
-                $scope.cart = cart;
             };
 
             $scope.deleteProduct = function(item) {
                 var index = cart.indexOf(item);
+                $scope.buyer.credit += item.product.price*$scope.cart[index].quantity;
                 if(index > -1) {
                     cart.splice(index,1);
                 }
@@ -101,7 +106,7 @@ angular.module('buckutt.sell.interface', [
             }
 
 
-            setTimeout($scope.loadProducts,50);
+            setTimeout($scope.loadProducts,100);
         }
 
     })
