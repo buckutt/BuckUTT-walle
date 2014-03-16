@@ -20,7 +20,11 @@ angular.module('buckutt.sell.waiter', [
         return $resource('/api/users/data=:data&meanOfLogin=:mol&point_id=:point_id', {data: "", mol: "", point_id: ""});
     })
 
-    .controller('WaiterCtrl', function WaiterCtrl($scope, $rootScope, $state, $stateParams, $cookieStore, Users) {
+    .factory('Logout', function($resource) {
+        return $resource('/api/users/log/out/id=:id', {id: ""});
+    })
+
+    .controller('WaiterCtrl', function WaiterCtrl($scope, $rootScope, $state, $stateParams, $cookieStore, Users, Logout) {
         if(!$rootScope.isSeller || !$rootScope.isLogged) $state.transitionTo('connection.status', {error:3});
         $("#cardId").focus();
         var seller = undefined;
@@ -40,6 +44,17 @@ angular.module('buckutt.sell.waiter', [
         $scope.focusOnInput = function () {
             $("#cardId").focus();
         };
+
+        $scope.logout = function() {
+            Logout.get({id: $rootScope.seller.id});
+            $rootScope.isSeller = false;
+            $rootScope.isLogged = false;
+            $rootScope.isAdmin = false;
+            $rootScope.isReloader = false;
+            $rootScope.seller = undefined;
+            $rootScope.buyer = undefined;
+            $state.transitionTo("connection.status");
+        }
 
         displayError = function (error) {
             if(error != undefined) $scope.error = errors[parseInt(error)];
