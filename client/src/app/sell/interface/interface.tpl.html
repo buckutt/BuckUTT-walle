@@ -22,9 +22,9 @@
                             <img src="assets/img/youenn.png" />
                         </div>
                         <div class="bu-user-infos">
-                            <strong class="name">Youenn Piolet</strong><br />
-                            <small class="surname">Secrépute - TC01</small><br />
-                            <small class="sold">4.00 €</small>
+                            <strong class="name">{{ buyer.firstname }} {{ buyer.lastname }}</strong><br />
+                            <small class="surname">BDE {{ buyer.nickname }}</small><br />
+                            <small class="sold">{{ buyer.credit/100 }} €</small>
                         </div>
                     </div>
 

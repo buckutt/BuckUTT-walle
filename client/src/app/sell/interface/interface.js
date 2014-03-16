@@ -27,32 +27,32 @@ angular.module('buckutt.sell.interface', [
         if(!$rootScope.isSeller || !$rootScope.isLogged) $state.transitionTo('connection.status', {error:3});
         if(!$rootScope.buyer) $state.transitionTo('sell.waiter', {error:1});
         else {
-            $scope.buyer = $rootScope.buyer;
-
             var currentCategory = "Accueil";
             $scope.categories = [];
             var products = {};
+            $scope.buyer = $rootScope.buyer;
 
-            var getProducts = Products.get({buyer_id: $scope.buyer.id, point_id: $cookieStore.get("pointId")}, function () {
-                for(var productKey in getProducts) {
-                    var product = getProducts[productKey];
-                    if(product.category == null) {
-                        product.category = "Accueil";
+            $scope.loadProducts = function () {
+                var getProducts = Products.get({buyer_id: $scope.buyer.id, point_id: $cookieStore.get("pointId")}, function () {
+                    for(var productKey in getProducts) {
+                        var product = getProducts[productKey];
+                        if(product.category == null) {
+                            product.category = "Accueil";
+                        }
+                        if(!products[product.category]) {
+                            $scope.categories.push({
+                                "id": product.category,
+                                "name": product.category
+                            });
+                            products[product.category] = [];
+                        }
+                        if(product.obj_type == "product") products[product.category].push(product);
                     }
-                    if(!products[product.category]) {
-                        $scope.categories.push({
-                            "id": product.category,
-                            "name": product.category
-                        });
-                        products[product.category] = [];
-                    }
-                    if(product.obj_type == "product") products[product.category].push(product);
-                }
 
-                $scope.switchCategory(currentCategory);
-                $scope.actualProducts = products[currentCategory];
-            });
-
+                    $scope.switchCategory(currentCategory);
+                    $scope.actualProducts = products[currentCategory];
+                });
+            };
 
             $scope.isActive = function(category) {
                 if (category.id == currentCategory) {
@@ -99,6 +99,9 @@ angular.module('buckutt.sell.interface', [
                 newPurchases.products = $scope.cart;
                 newPurchases.$save();
             }
+
+
+            setTimeout($scope.loadProducts,50);
         }
 
     })
