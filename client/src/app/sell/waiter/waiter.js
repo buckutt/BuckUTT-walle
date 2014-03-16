@@ -54,7 +54,7 @@ angular.module('buckutt.sell.waiter', [
             $rootScope.seller = undefined;
             $rootScope.buyer = undefined;
             $state.transitionTo("connection.status");
-        }
+        };
 
         displayError = function (error) {
             if(error != undefined) $scope.error = errors[parseInt(error)];
