@@ -5,7 +5,7 @@ login.login = function(app, users){
     /*
         Check user PIN
     */
-    app.get("/api/users/login/id=:id&pwd=:pwd", function(req, res){
+    app.get("/api/users/log/in/id=:id&pwd=:pwd", function(req, res){
         var status = {logged: false};
 
         var user = users.getUserById(req.params.id);
