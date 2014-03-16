@@ -185,6 +185,11 @@
     display: table-cell;
     width: 50px;
 }
+
+.bu-choice .item-icon img {
+    height:100px;
+}
+
 .bu-choice .item-infos {
     display: table-cell;
     vertical-align: top;
