@@ -16,20 +16,6 @@ angular.module('buckutt.sell.waiter', [
         })
     })
 
-    .directive('ngEnter', function () {
-        return function (scope, element, attrs) {
-            element.bind("keypress", function (event) {
-                if(event.which === 13) {
-                    scope.$apply(function (){
-                        scope.$eval(attrs.ngEnter);
-                    });
-
-                    event.preventDefault();
-                }
-            });
-        };
-    })
-
     .factory('Users', function($resource) {
         return $resource('/api/users/data=:data&meanOfLogin=:mol&point_id=:point_id', {data: "", mol: "", point_id: ""});
     })
@@ -42,7 +28,7 @@ angular.module('buckutt.sell.waiter', [
 
         $scope.pressEnter = function() {
             buyer = Users.get({data: $scope.cardId, mol: "4", point_id: $cookieStore.get("pointId")}, function(){
-                if(buyer.error) displayError(1);
+                if(buyer.error == "No entry") displayError(1);
                 else {
                     $rootScope.buyer = buyer;
                     $state.transitionTo("sell.interface");
