@@ -194,3 +194,22 @@
 .bu-choice .item-infos .item-name {
     font-weight: bold;
 }
+
+.bu-choice-purchase {
+    height:60px;
+    width:100%;
+    background:#58a89b;
+    margin-top:15px;
+}
+
+.bu-choice-purchase a {
+    height:100%;
+    width:100%;
+    display:block;
+}
+
+.bu-user-items-container {
+    height:533px;
+    padding-top:10px;
+    overflow:hidden;
+}
