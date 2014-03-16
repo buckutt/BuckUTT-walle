@@ -39,7 +39,7 @@ angular.module('buckutt.sell.interface', [
                         if(product.category == null) {
                             product.category = "Accueil";
                         }
-                        if(!products[product.category]) {
+                        if(!products[product.category] && product.category) {
                             $scope.categories.push({
                                 "id": product.category,
                                 "name": product.category
@@ -48,7 +48,7 @@ angular.module('buckutt.sell.interface', [
                         }
                         if(product.obj_type == "product") products[product.category].push(product);
                     }
-
+                    console.log($scope.categories);
                     $scope.switchCategory(currentCategory);
                     $scope.actualProducts = products[currentCategory];
                 });
