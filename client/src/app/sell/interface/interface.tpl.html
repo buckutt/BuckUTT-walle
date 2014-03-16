@@ -41,10 +41,10 @@
                                         {{ item.quantity }}
                                     </div>
                                     <div class="item-name">
-                                        {{ item.product.name }}
+                                        {{ item.product.obj_name }}
                                     </div>
                                     <div class="item-price">
-                                        {{ (item.quantity*item.product.price).toFixed(2) }} €
+                                        {{ (item.quantity*item.product.price).toFixed(2)/100 }} €
                                     </div>
                                     <div class="item-edit">
                                         <a href="">
@@ -66,10 +66,10 @@
                             <div class="item-icon"><img src="assets/img/coca.jpg" alt="Coca cola"></div>
                             <div class="item-infos">
                                 <div class="item-name">
-                                    {{ product.name }}
+                                    {{ product.obj_name }}
                                 </div>
                                 <div class="item-price">
-                                    {{ product.price }} €
+                                    {{ product.price/100 }} €
                                 </div>
                             </div>
                         </div>

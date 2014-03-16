@@ -16,7 +16,7 @@ angular.module('buckutt.connection.pin', [
     })
 
     .factory('Sellers', function($resource) {
-        return $resource('/api/users/login/id=:id&pwd=:pwd', {id:"", pwd:""});
+        return $resource('/api/users/log/in/id=:id&pwd=:pwd', {id:"", pwd:""});
     })
 
     .controller('PinCtrl', function PinCtrl($scope, $rootScope, $stateParams, $cookieStore, $state, Sellers) {
