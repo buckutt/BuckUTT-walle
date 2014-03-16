@@ -1,10 +1,18 @@
 <div class="bu-pin" ng-click="focusOnInput()">
+    <div class="bu-waiter-header">
+        <div class="bu-waiter-logout">
+            <a href="" ng-click="logout()">
+                <i class="glyphicon glyphicon-off"></i>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
 	<div class="bu-pin-container">
 		Rentre ton code PIN !<br />
 		<span class="bu-pin-error">{{ error }}</span><br />
 
 		<div class="bu-pin-left">
-			<img src="assets/img/youenn.png" /><br />
+            <img src="assets/img/users/{{seller.id}}.jpg" alt="PP"/><br />
 			{{ seller.firstname }} {{ seller.lastname }}
 		</div>
 

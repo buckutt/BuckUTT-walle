@@ -6,7 +6,7 @@
                         </div>
                     </div>
                     <div class="bu-logout">
-                        <a href="">
+                        <a href="" ng-click="finish()">
                             <i class="glyphicon glyphicon-off"></i>
                         </a>
                     </div>
@@ -19,12 +19,12 @@
                 <div class="bu-user">
                     <div class="bu-user-profile">
                         <div class="bu-user-image">
-                            <img src="assets/img/youenn.png" />
+                            <img src="assets/img/users/{{buyer.id}}.jpg" alt="PP"/>
                         </div>
                         <div class="bu-user-infos">
-                            <strong class="name">Youenn Piolet</strong><br />
-                            <small class="surname">Secrépute - TC01</small><br />
-                            <small class="sold">4.00 €</small>
+                            <strong class="name">{{ buyer.firstname }} {{ buyer.lastname }}</strong><br />
+                            <small class="surname">BDE {{ buyer.nickname }}</small><br />
+                            <span class="bu-credit">{{ buyer.credit/100 }} €</span>
                         </div>
                     </div>
 
@@ -63,7 +63,7 @@
                 <div class="bu-choices">
                     <a href="" class="bu-choice" ng-click="addProduct(product)"  ng-repeat="product in actualProducts">
                         <div class="bu-choice-inner">
-                            <div class="item-icon"><img src="assets/img/coca.jpg" alt="Coca cola"></div>
+                            <div class="item-icon"><img src="assets/img/products/{{ product.obj_id }}.png" alt="{{ product.obj_name }}"></div>
                             <div class="item-infos">
                                 <div class="item-name">
                                     {{ product.obj_name }}

@@ -49,6 +49,16 @@ angular.module('buckutt.connection.pin', [
             });
         }
 
+        $scope.logout = function() {
+            $rootScope.isSeller = false;
+            $rootScope.isLogged = false;
+            $rootScope.isAdmin = false;
+            $rootScope.isReloader = false;
+            $rootScope.seller = undefined;
+            $rootScope.buyer = undefined;
+            $state.transitionTo("connection.status");
+        };
+
         $scope.focusOnInput();
     });
 

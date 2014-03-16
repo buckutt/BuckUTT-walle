@@ -27,32 +27,32 @@ angular.module('buckutt.sell.interface', [
         if(!$rootScope.isSeller || !$rootScope.isLogged) $state.transitionTo('connection.status', {error:3});
         if(!$rootScope.buyer) $state.transitionTo('sell.waiter', {error:1});
         else {
-            $scope.buyer = $rootScope.buyer;
-
             var currentCategory = "Accueil";
             $scope.categories = [];
             var products = {};
+            $scope.buyer = $rootScope.buyer;
 
-            var getProducts = Products.get({buyer_id: $scope.buyer.id, point_id: $cookieStore.get("pointId")}, function () {
-                for(var productKey in getProducts) {
-                    var product = getProducts[productKey];
-                    if(product.category == null) {
-                        product.category = "Accueil";
+            $scope.loadProducts = function () {
+                var getProducts = Products.get({buyer_id: $scope.buyer.id, point_id: $cookieStore.get("pointId")}, function () {
+                    for(var productKey in getProducts) {
+                        var product = getProducts[productKey];
+                        if(product.category == null) {
+                            product.category = "Accueil";
+                        }
+                        if(!products[product.category] && product.category) {
+                            $scope.categories.push({
+                                "id": product.category,
+                                "name": product.category
+                            });
+                            products[product.category] = [];
+                        }
+                        if(product.obj_type == "product") products[product.category].push(product);
                     }
-                    if(!products[product.category]) {
-                        $scope.categories.push({
-                            "id": product.category,
-                            "name": product.category
-                        });
-                        products[product.category] = [];
-                    }
-                    if(product.obj_type == "product") products[product.category].push(product);
-                }
-
-                $scope.switchCategory(currentCategory);
-                $scope.actualProducts = products[currentCategory];
-            });
-
+                    console.log($scope.categories);
+                    $scope.switchCategory(currentCategory);
+                    $scope.actualProducts = products[currentCategory];
+                });
+            };
 
             $scope.isActive = function(category) {
                 if (category.id == currentCategory) {
@@ -69,25 +69,30 @@ angular.module('buckutt.sell.interface', [
             var cart = [];
 
             $scope.addProduct = function(product) {
-                var isFound = false;
-                for(item in cart) {
-                    if(cart[item].product.obj_id == product.obj_id) {
-                        cart[item].quantity++;
-                        isFound = true;
+                if(product.price > $scope.buyer.credit) {
+                    alert('No');
+                } else {
+                    var isFound = false;
+                    for(item in cart) {
+                        if(cart[item].product.obj_id == product.obj_id) {
+                            cart[item].quantity++;
+                            isFound = true;
+                        }
                     }
+                    if(!isFound) {
+                        cart.push({
+                            "product":product,
+                            "quantity":1
+                        });
+                    }
+                    $scope.buyer.credit -= product.price;
+                    $scope.cart = cart;
                 }
-                if(!isFound) {
-                    cart.push({
-                        "product":product,
-                        "quantity":1
-                    });
-                }
-
-                $scope.cart = cart;
             };
 
             $scope.deleteProduct = function(item) {
                 var index = cart.indexOf(item);
+                $scope.buyer.credit += item.product.price*$scope.cart[index].quantity;
                 if(index > -1) {
                     cart.splice(index,1);
                 }
@@ -99,6 +104,14 @@ angular.module('buckutt.sell.interface', [
                 newPurchases.products = $scope.cart;
                 newPurchases.$save();
             }
+
+            $scope.finish = function() {
+                $rootScope.buyer = undefined;
+                $state.transitionTo("sell.waiter");
+            };
+
+
+            setTimeout($scope.loadProducts,100);
         }
 
     })

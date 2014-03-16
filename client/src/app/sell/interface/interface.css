@@ -95,10 +95,10 @@
     padding-top: 11px;
 }
 .bu-user-infos .name {
-    font-size: 24px;
+    font-size: 20px;
 }
 .bu-user-infos .surname {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .bu-user-item {
@@ -157,11 +157,12 @@
 }
 .bu-choice {
     display: inline-block;
-    width: 220px;
+    width: 200px;
     background: #e5e5e5;
     padding: 5px;
     color: #5c5c5c;
     margin: 0 10px 10px 10px;
+    overflow:hidden;
 }
 .bu-choice:hover {
     background: #d5d5d5;
@@ -178,18 +179,23 @@
 }
 .bu-choice-inner {
     display: table;
-    width: 220px;
+    width: 200px;
 }
 .bu-choice .item-icon {
     display: table-cell;
-    width: 60px;
+    width: 50px;
 }
+
+.bu-choice .item-icon img {
+    height:100px;
+}
+
 .bu-choice .item-infos {
     display: table-cell;
     vertical-align: top;
     padding-top: 31px;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
 }
 .bu-choice .item-infos .item-name {
     font-weight: bold;
@@ -212,4 +218,8 @@
     height:533px;
     padding-top:10px;
     overflow:hidden;
+}
+
+.bu-credit {
+    font-weight:bold;
 }
