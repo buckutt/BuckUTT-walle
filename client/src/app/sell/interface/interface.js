@@ -105,6 +105,11 @@ angular.module('buckutt.sell.interface', [
                 newPurchases.$save();
             }
 
+            $scope.finish = function() {
+                $rootScope.buyer = undefined;
+                $state.transitionTo("sell.waiter");
+            };
+
 
             setTimeout($scope.loadProducts,100);
         }
