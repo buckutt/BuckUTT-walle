@@ -5,10 +5,53 @@ var dbConnection = null;
 
 
 /*
+    Return the content of a promotion depending on:
+        His ID
+    Take a callback function to handle data
+*/
+
+products.getPromotionContent = function(id, handleData){
+    var query = "SELECT *\
+        FROM `tj_object_link_oli`\
+        WHERE obj_id_parent =?";
+
+        var params = [id];
+
+        dbConnection.query(query, params, function(err, rows, fields){
+            if (err) throw err;
+            handleData(rows);
+        });
+}
+
+
+/*
+    Return one product info depending on:
+        His ID
+    Take a callback function to handle data
+*/
+
+products.getProduct = function(id, handleData){
+    var query = "SELECT t_price_pri.pri_credit, tj_object_link_oli.obj_id_parent, t_object_obj.* FROM `t_price_pri`\
+        LEFT JOIN `tj_object_link_oli`\
+        ON t_price_pri.obj_id = tj_object_link_oli.obj_id_child\
+        LEFT JOIN `t_object_obj`\
+        ON t_price_pri.obj_id = t_object_obj.obj_id\
+        WHERE t_price_pri.obj_id=?  AND t_price_pri.pri_removed != 1 AND tj_object_link_oli.oli_removed != 1";
+
+    var params = [id];
+
+    dbConnection.query(query, params, function(err, rows, fields){
+        if (err) throw err;
+        handleData(rows);
+    });
+}
+
+
+/*
     Return all products depending on:
         Who's buying
         Where he's buying
-    Take a callback function (handleData) todo whatever with the products
+    Take a callback function to handle data
 */
 
 products.getProductList = function(buyer_id, point_id, handleData){
@@ -68,11 +111,24 @@ products.getProductList = function(buyer_id, point_id, handleData){
 /*
     Init module
 */
+
 products.products = function(app, dbObject){
     dbConnection = dbObject;
 
 	app.get("/api/products/buyer_id=:buyer_id&point_id=:point_id", function(req, res){
         products.getProductList(req.params.buyer_id, req.params.point_id, function(data){
+            res.json(data);
+        });
+    })
+
+    .get("/api/products/product_id=:product_id", function(req, res){
+        products.getProduct(req.params.product_id, function(data){
+            res.json(data);
+        });
+    })
+
+    .get("/api/products/promotion_id=:promotion_id", function(req, res){
+        products.getPromotionContent(req.params.promotion_id, function(data){
             res.json(data);
         });
     })
