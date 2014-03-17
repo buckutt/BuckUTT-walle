@@ -1,5 +1,9 @@
 module.exports = function(app, dbConnection){
-	require('./api/users/users.js').users(app, dbConnection);
-    require('./api/products/products.js').products(app, dbConnection);
-	require('./api/purchases/purchases.js').purchases(app, dbConnection);
+	var users = require('./api/users/users.js');
+    var products = require('./api/products/products.js');
+    var purchases = require('./api/purchases/purchases.js');
+  
+    users.users(app, dbConnection);
+    products.products(app, dbConnection);
+	purchases.purchases(app, dbConnection, users, products);
 }
