@@ -89,7 +89,7 @@ users.checkRights = function(userId, right_id, point_id, fun_id){
 
 users.users = function(app, dbConnection){
 	//Instanciate children routes first
-	users.login = require("./users.routes.js")(app, users);
+	users.children = require("./users.routes.js")(app, users);
 
 	//Remove users from userlist every 180sec
 	setInterval(function(){
