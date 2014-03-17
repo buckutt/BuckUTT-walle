@@ -36,7 +36,7 @@ products.getProduct = function(id, handleData){
         ON t_price_pri.obj_id = tj_object_link_oli.obj_id_child\
         LEFT JOIN `t_object_obj`\
         ON t_price_pri.obj_id = t_object_obj.obj_id\
-        WHERE t_price_pri.obj_id=?  AND t_price_pri.pri_removed != 1 AND tj_object_link_oli.oli_removed != 1";
+        WHERE t_price_pri.obj_id=?  AND t_price_pri.pri_removed != 1 AND (tj_object_link_oli.oli_removed != 1 OR tj_object_link_oli.oli_removed IS NULL)";
 
     var params = [id];
 
