@@ -33,7 +33,7 @@
                             <div class="bu-user-item">
                                 <div class="bu-user-item-inner">
                                     <div class="item-remove">
-                                        <a href="" ng-click="deleteProduct(item)">
+                                        <a href="" ng-click="deleteProduct(item, 'all')">
                                             <i class="glyphicon glyphicon-remove"></i>
                                         </a>
                                     </div>
@@ -42,14 +42,18 @@
                                     </div>
                                     <div class="item-name">
                                         {{ item.product.obj_name }}
+                                        <div class="item-promo-content-name" ng-repeat="promoProduct in item.content">{{promoProduct.obj_name}}</div>
                                     </div>
                                     <div class="item-price">
                                         {{ (item.quantity*item.product.price).toFixed(2)/100 }} €
                                     </div>
-                                    <div class="item-edit">
+                                    <div class="item-edit" ng-if="!item.content">
                                         <a href="">
                                             <i class="glyphicon glyphicon-pencil"></i>
                                         </a>
+                                    </div>
+                                    <div class="item-edit" ng-if="item.content">
+
                                     </div>
                                 </div>
                             </div>
