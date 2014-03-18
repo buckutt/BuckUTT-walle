@@ -157,11 +157,12 @@
 }
 .bu-choice {
     display: inline-block;
-    width: 200px;
+    width: 180px;
+    max-height:110px;
     background: #e5e5e5;
     padding: 5px;
     color: #5c5c5c;
-    margin: 0 10px 10px 10px;
+    margin: 0 5px 5px 5px;
     overflow:hidden;
 }
 .bu-choice:hover {
@@ -179,15 +180,15 @@
 }
 .bu-choice-inner {
     display: table;
-    width: 200px;
+    width: 180px;
 }
 .bu-choice .item-icon {
     display: table-cell;
-    width: 50px;
+    width: 40px;
 }
 
 .bu-choice .item-icon img {
-    height:100px;
+    height:90px;
 }
 
 .bu-choice .item-infos {
@@ -222,6 +223,7 @@
 
 .bu-credit {
     font-weight:bold;
+    font-size:16px;
 }
 
 .item-promo-content-name {
