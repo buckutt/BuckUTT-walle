@@ -1,0 +1,15 @@
+<div class="bu-point">
+    <div class="bu-waiter-header">
+        <div class="bu-waiter-logout">
+            <a href="" ng-click="logout()">
+                <i class="glyphicon glyphicon-off"></i>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="bu-point-welcome">Veuillez choisir le point</div>
+    <div class="bu-point-list">
+        <div class="bu-point-choice" ng-repeat="point in points" ng-click="changePoint(point.poi_id)">{{ point.poi_name }}</div>
+    </div>
+</div>

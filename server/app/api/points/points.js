@@ -21,7 +21,7 @@ points.getPointList = function(handleData){
 points.points = function(container){
     dependency = container;
 
-    dependency.app.get("/api/points/", function(req, res){
+    dependency.app.get("/api/points", function(req, res){
         points.getPointList(function(data){
             res.json(data);
         });
