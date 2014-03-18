@@ -170,7 +170,7 @@ angular.module('buckutt.sell.interface', [
                             var promoItem = {
                                 "product":getProductById(promo),
                                 "quantity":1,
-                                "content":[]
+                                "content":{}
                             };
                             for(step in promos[promo][uid]) {
                                 promoItem.content[step] = promos[promo][uid][step].product;
