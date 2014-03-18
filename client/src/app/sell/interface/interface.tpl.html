@@ -19,7 +19,7 @@
                 <div class="bu-user">
                     <div class="bu-user-profile">
                         <div class="bu-user-image">
-                            <img src="assets/img/users/{{buyer.id}}.jpg" alt="PP"/>
+                            <img src="assets/img/users/{{buyer.id}}.jpg?1" alt="PP"/>
                         </div>
                         <div class="bu-user-infos">
                             <strong class="name">{{ buyer.firstname }} {{ buyer.lastname }}</strong><br />
@@ -67,7 +67,7 @@
                 <div class="bu-choices">
                     <a href="" class="bu-choice" ng-click="addProduct(product)"  ng-repeat="product in actualProducts">
                         <div class="bu-choice-inner">
-                            <div class="item-icon"><img src="assets/img/products/{{ product.obj_id }}.png" alt="{{ product.obj_name }}"></div>
+                            <div class="item-icon"><img ng-src="assets/img/products/{{ product.obj_id }}.png" alt="{{ product.obj_name }}"></div>
                             <div class="item-infos">
                                 <div class="item-name">
                                     {{ product.obj_name }}

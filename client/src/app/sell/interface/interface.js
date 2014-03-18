@@ -209,6 +209,7 @@ angular.module('buckutt.sell.interface', [
                 var params = {};
                 params.buyer_id = $scope.buyer.id;
                 params.seller_id = $rootScope.seller.id;
+                params.point_id = $cookieStore.get("pointId");
                 params.products = $scope.cart;
                 Purchases.save({}, params);
             }
