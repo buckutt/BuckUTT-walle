@@ -1,7 +1,7 @@
 var async = require('async');
 var users = module.exports;
 
-
+var dependency = null;
 users.userlist = [];
 
 //TODO: Dunno if filter is relevant in those cases.. gotta check it out
@@ -87,9 +87,11 @@ users.checkRights = function(userId, right_id, point_id, fun_id){
 };
 
 
-users.users = function(app, dbConnection){
+users.users = function(container){
+	dependency = container;
+	
 	//Instanciate children routes first
-	users.children = require("./users.routes.js")(app, users);
+	users.children = require("./users.routes.js")(container);
 
 	//Remove users from userlist every 180sec
 	setInterval(function(){
@@ -107,7 +109,7 @@ users.users = function(app, dbConnection){
 		Check and return selling right
 	*/
 
-	app.get("/api/users/data=:data&meanOfLogin=:meanOfLogin&point_id=:point_id", function(req, res){
+	dependency.app.get("/api/users/data=:data&meanOfLogin=:meanOfLogin&point_id=:point_id", function(req, res){
 		var error = null;
 		//You MUST see async api.
 		async.waterfall([
@@ -115,7 +117,7 @@ users.users = function(app, dbConnection){
 				var query = "SELECT usr_id FROM tj_usr_mol_jum WHERE jum_data = ? AND mol_id = ?";
 				var params = [req.params.data, req.params.meanOfLogin];
 
-				dbConnection.query(query, params, function(err, rows, fields){
+				dependency.dbConnection.query(query, params, function(err, rows, fields){
 					if (err) throw err;
 					if (rows.length > 1) console.log("ERROR api/users multiple entry for params:"+params);
 					if (rows.length < 1){
@@ -140,7 +142,7 @@ users.users = function(app, dbConnection){
 				var query = "SELECT rig.rig_id As rig_id, rig.rig_name As rig_name, rig.rig_admin As rig_admin, jur.fun_id As fun_id, jur.poi_id As poi_id, fun_name FROM ts_right_rig rig, t_period_per per, tj_usr_rig_jur jur LEFT JOIN t_fundation_fun fun ON fun.fun_id = jur.fun_id WHERE jur.usr_id = ? AND rig.rig_id = jur.rig_id AND per.per_id = jur.per_id AND jur.jur_removed = '0' AND rig.rig_removed = '0' AND per.per_date_start <= NOW() AND per.per_date_end >= NOW()";
 				var params = [user_id];
 
-				dbConnection.query(query, params, function(err, rows, fields){
+				dependency.dbConnection.query(query, params, function(err, rows, fields){
 	  				if (err) throw err;
 					callback(null, user_id, rows);
 				});
@@ -150,7 +152,7 @@ users.users = function(app, dbConnection){
 				var query = "SELECT usr_fail_auth, usr_blocked, usr_pwd, usr_firstname, usr_lastname, usr_nickname, usr_mail, usr_credit, img_id FROM ts_user_usr WHERE usr_id = ?";
 				var params = [user_id];
 
-				dbConnection.query(query, params, function(err, rows, fields){
+				dependency.dbConnection.query(query, params, function(err, rows, fields){
 					if (err) throw err;
 					if (rows.length > 1) console.log("ERROR api/users multiple entry for params:"+params);
 

@@ -1,9 +1,7 @@
 var async = require("async");
 var purchases = module.exports;
 
-var dbConnection = null;
-var users = null;
-var products = null;
+var dependency = null;
 
 /*
     New purchase(s) entry depending on which items are chosen
@@ -17,12 +15,12 @@ purchases.newPurchase = function(buyer_id, seller_id, point_id, cart, handleData
         return;
     }
 
-    var buyer = users.getUserById(buyer_id);
-    var seller = users.getUserById(seller_id);  
+    var buyer = dependency.users.getUserById(buyer_id);
+    var seller = dependency.users.getUserById(seller_id);  
 
     if ((buyer != null) && (seller != null)){                                        //Check if buyer and seller has both swiped
         if (seller.logged){                                                          //Check if seller is logged
-            if (users.checkRights(seller.id, 11, point_id).hasRight == true){ //Check if seller has Right 
+            if (dependency.users.checkRights(seller.id, 11, point_id).hasRight == true){ //Check if seller has Right 
                 //Preparing async tasks
                 var tasks = [];
                 var totalPrice = 0;
@@ -30,7 +28,7 @@ purchases.newPurchase = function(buyer_id, seller_id, point_id, cart, handleData
                 cart.forEach(function(product)
                 {
                     tasks.push(function(callback){
-                        products.getProduct(product.id, function(data){
+                        dependency.products.getProduct(product.id, function(data){
                             var price = data[0].pri_credit;
                             var fundation_id = data[0].fun_id;
 
@@ -44,7 +42,7 @@ purchases.newPurchase = function(buyer_id, seller_id, point_id, cart, handleData
                             var query = "INSERT INTO t_purchase_pur VALUES('', NOW(), ?, ?, ?, ?, ?, ?, ?, 'LOLOLOL', '0')";
                             var params = [product.type, product.id, price, buyer_id, seller_id, point_id, fundation_id];
 
-                            dbConnection.query(query, params, function(err, res){
+                            dependency.dbConnection.query(query, params, function(err, res){
                                 if (err) throw err;
                             });
                             callback(null);
@@ -56,7 +54,7 @@ purchases.newPurchase = function(buyer_id, seller_id, point_id, cart, handleData
                     var query = "UPDATE ts_user_usr SET usr_credit=usr_credit-?";
                     var params = [totalPrice];
 
-                    dbConnection.query(query, params, function(err, res){
+                    dependency.dbConnection.query(query, params, function(err, res){
                         if (err) throw err;
                         handleData({lol: "lol"});
                     })
@@ -80,10 +78,8 @@ purchases.newPurchase = function(buyer_id, seller_id, point_id, cart, handleData
 /*
     Init module
 */
-purchases.purchases = function(app, dbObject, usersObject, productsObject){
-    dbConnection = dbObject;
-    users = usersObject;
-    products = productsObject;
+purchases.purchases = function(container){
+    dependency = container;
 
     /*
         body =         
@@ -91,7 +87,7 @@ purchases.purchases = function(app, dbObject, usersObject, productsObject){
             buyer_id: 8871,
             seller_id: 8871,
             point_id: 3,
-            products: 
+            dependency.products: 
             [
                 {id: 27, type: "product"},
                 {id: 12, type: "product"}
@@ -99,8 +95,8 @@ purchases.purchases = function(app, dbObject, usersObject, productsObject){
         }
     */
     
-    app.post("/api/purchases/", function(req, res){
-        purchases.newPurchase(req.body.buyer_id, req.body.seller_id, req.body.point_id, req.body.products, function(data){
+    dependency.app.post("/api/purchases/", function(req, res){
+        purchases.newPurchase(req.body.buyer_id, req.body.seller_id, req.body.point_id, req.body.dependency.products, function(data){
             res.json(data);
         });
     })

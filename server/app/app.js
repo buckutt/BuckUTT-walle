@@ -4,27 +4,46 @@ var path = require('path');
 var fs = require('fs');
 
 
+//Objects that can be changed at any time and must be updated everywhere
+var dependency = {};
+
+
 //Load config
-var config = JSON.parse(fs.readFileSync("./server/config.json"));
+dependency.config = JSON.parse(fs.readFileSync("./server/config.json"));
 
-//Test
 //Mysql connection
-var dbConnection = mysql.createConnection({
-  host: config.mysql.host,
-  user: config.mysql.user,
-  password: config.mysql.password,
-  database: config.mysql.database,
-});
+function newMysqlConn(){
+    dependency.dbConnection = mysql.createConnection(dependency.config.mysql);
 
-dbConnection.connect(function(err, res){
-	if (err) throw err;
-});
+    try{
+        dependency.dbConnection.connect(function(err, res){
+            if (err){
+                console.log("Can't connect to mysql, retry...");
+                setTimeout(newMysqlConn, 1000);
+            }
+            else{
+                console.log("Connected to mysql");
+            }
+        });
+        
+        dependency.dbConnection.on('error', function(err){
+            console.log("Mysql error: "+err);
+            newMysqlConn();
+        });       
+    }
+    catch(err){console.log("mdrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")}
+}
+
+
+newMysqlConn();
+
 
 
 //Web server
-var app = express()
+dependency.app = express()
 .use(express.static(path.join(__dirname, '../../client/src')));
 
-require('./routes.js')(app, dbConnection);
+require('./routes.js')(dependency);
 
-app.listen(8080);
+dependency.app.listen(8080);
+console.log("Listening on 8080");
