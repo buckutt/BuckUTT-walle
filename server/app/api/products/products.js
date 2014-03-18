@@ -55,7 +55,7 @@ products.getProduct = function(id, handleData){
     Take a callback function to handle data
 */
 
-products.getProductList = function(buyer_id, point_id, handleData){
+products.getProductList = function(seller_id, point_id, handleData){
     async.waterfall([
         function(callback){
             var query = "SELECT @periods := group_concat(per.per_id) AS periods\
@@ -96,8 +96,8 @@ products.getProductList = function(buyer_id, point_id, handleData){
                 AND (obj.obj_stock > 0 OR obj.obj_stock = -1 ) AND obj.obj_removed = 0 AND pri.pri_removed = 0\
                 GROUP BY obj.obj_id ORDER BY jop.jop_priority ASC, obj.obj_name ASC";
 
-            var params = [point_id, periods, buyer_id, periods, 
-                periods, periods, point_id, buyer_id];
+            var params = [point_id, periods, seller_id, periods, 
+                periods, periods, point_id, seller_id];
 
             dependency.dbConnection.query(query, params, function(err, rows, fields){
                 if (err) throw err;
@@ -116,8 +116,8 @@ products.getProductList = function(buyer_id, point_id, handleData){
 products.products = function(container){
     dependency = container;
 
-	dependency.app.get("/api/products/buyer_id=:buyer_id&point_id=:point_id", function(req, res){
-        products.getProductList(req.params.buyer_id, req.params.point_id, function(data){
+	dependency.app.get("/api/products/seller_id=:seller_id&point_id=:point_id", function(req, res){
+        products.getProductList(req.params.seller_id, req.params.point_id, function(data){
             res.json(data);
         });
     })
