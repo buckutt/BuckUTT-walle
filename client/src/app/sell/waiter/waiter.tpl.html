@@ -17,7 +17,9 @@
     </div>
 
 	<div class="bu-waiter-error">{{ error }}</div>
-	<div class="bu-waiter-waiter">En attente d'une carte étu !</div>
+	<div class="bu-waiter-waiter">En attente d'une carte étu !
+        <div ng-if="lastBuyer"><br /><br />Dernière action par {{ lastBuyer.firstname }} {{ lastBuyer.lastname }}</div>
+    </div>
     <form>
         <input type="text" ng-enter="pressEnter()" ng-model="cardId" id="cardId"/>
     </form>

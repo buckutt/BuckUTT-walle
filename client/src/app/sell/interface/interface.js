@@ -212,6 +212,9 @@ angular.module('buckutt.sell.interface', [
                 params.point_id = $cookieStore.get("pointId");
                 params.products = $scope.cart;
                 Purchases.save({}, params);
+
+                $rootScope.lastBuyer = $scope.buyer;
+                $state.transitionTo('sell.waiter');
             }
 
             $scope.finish = function() {

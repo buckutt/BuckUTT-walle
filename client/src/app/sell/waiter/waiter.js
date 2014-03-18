@@ -28,6 +28,7 @@ angular.module('buckutt.sell.waiter', [
         if(!$rootScope.isSeller || !$rootScope.isLogged) $state.transitionTo('connection.status', {error:3});
         $("#cardId").focus();
         $scope.isAdmin = $rootScope.isAdmin;
+        $scope.lastBuyer = $rootScope.lastBuyer;
         var seller = undefined;
         var errors = ['','Erreur : L\'utilisateur n\'existe pas.'];
 
