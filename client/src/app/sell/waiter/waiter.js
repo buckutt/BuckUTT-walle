@@ -27,6 +27,7 @@ angular.module('buckutt.sell.waiter', [
     .controller('WaiterCtrl', function WaiterCtrl($scope, $rootScope, $state, $stateParams, $cookieStore, Users, Logout) {
         if(!$rootScope.isSeller || !$rootScope.isLogged) $state.transitionTo('connection.status', {error:3});
         $("#cardId").focus();
+        $scope.isAdmin = $rootScope.isAdmin;
         var seller = undefined;
         var errors = ['','Erreur : L\'utilisateur n\'existe pas.'];
 
@@ -54,6 +55,18 @@ angular.module('buckutt.sell.waiter', [
             $rootScope.seller = undefined;
             $rootScope.buyer = undefined;
             $state.transitionTo("connection.status");
+        };
+
+        $scope.changeMenu = function (link) {
+            switch(link) {
+                case 'point':
+                    $state.transitionTo('admin.point');
+                    break;
+                case 'admin':
+                    $rootScope.isAdmin = false;
+                    $scope.isAdmin = false;
+                    break;
+            }
         };
 
         displayError = function (error) {

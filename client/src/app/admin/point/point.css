@@ -1,22 +1,30 @@
-#cardId {
-    opacity:0;
+.bu-point-list {
+    width:80%;
+    margin:auto;
+    margin-top:15px;
+    text-align:center;
 }
 
-.bu-status {
-	width:100%;
-	height:100%;
-	text-align:center;
-	font-size:24px;
-	font-weight:bold;
+.bu-point-choice {
+    width:180px;
+    height:60px;
+    font-weight:bold;
+    display:inline-block;
+    margin:0 10px 10px 10px;
+    text-align:center;
+    font-size:18px;
+    padding-top:15px;
+    background: #e5e5e5;
+    color: #5c5c5c;
 }
 
-.bu-status-error {
-	color:red;
-	padding-top:50px;
-	font-size:18px;
-	height:18px;
+.bu-point-choice:hover {
+    background: #d5d5d5;
 }
 
-.bu-status-waiter {
-	padding-top:40px;
+.bu-point-welcome {
+    font-size:24px;
+    font-weight:bold;
+    padding-top:40px;
+    text-align:center;
 }
