@@ -206,9 +206,10 @@ angular.module('buckutt.sell.interface', [
             };
 
             $scope.sendPurchases = function() {
-                var newPurchases = new Purchases();
-                newPurchases.products = $scope.cart;
-                newPurchases.$save();
+                var params = {};
+                params.buyer_id = $scope.buyer.id;
+                params.products = $scope.cart;
+                Purchases.save({}, params);
             }
 
             $scope.finish = function() {
