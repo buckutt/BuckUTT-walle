@@ -16,7 +16,7 @@ angular.module('buckutt.sell.interface', [
     })
 
     .factory('Products', ['$resource', function($resource) {
-        return $resource('/api/products/buyer_id=:buyer_id&point_id=:point_id', {buyer_id:"", point_id:""}, {'get':  {method:'GET', isArray:true}});
+        return $resource('/api/products/seller_id=:seller_id&point_id=:point_id', {seller_id:"", point_id:""}, {'get':  {method:'GET', isArray:true}});
     }])
 
     .factory('Purchases', function($resource) {
@@ -40,7 +40,7 @@ angular.module('buckutt.sell.interface', [
             $scope.buyer = $rootScope.buyer;
 
             $scope.loadProducts = function () {
-                var getProducts = Products.get({buyer_id: $scope.buyer.id, point_id: $cookieStore.get("pointId")}, function () {
+                var getProducts = Products.get({seller_id: $rootScope.seller.id, point_id: $cookieStore.get("pointId")}, function () {
                     rawProducts = getProducts;
                     for(var productKey in getProducts) {
                         var product = getProducts[productKey];
