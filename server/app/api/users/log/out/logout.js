@@ -1,14 +1,18 @@
 var logout = module.exports;
 
+var dependency = null;
 
-logout.logout = function(app, users){
+
+logout.logout = function(container){
+    dependency = container;
+
     /*
         Logout user
     */
-    app.get("/api/users/log/out/id=:id", function(req, res){
+    dependency.app.get("/api/users/log/out/id=:id", function(req, res){
         var status = {logged: false};
 
-        var user = users.getUserById(req.params.id);
+        var user = dependency.users.getUserById(req.params.id);
 
         if ((user != null) && (user.logged == true)){
            user.logged = false;

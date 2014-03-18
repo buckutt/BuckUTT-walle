@@ -1,14 +1,19 @@
 var login = module.exports;
 
+var dependency = null;
 
-login.login = function(app, users){
+
+login.login = function(container){
+    dependency = container;
+
+
     /*
         Check user PIN
     */
-    app.get("/api/users/log/in/id=:id&pwd=:pwd", function(req, res){
+    dependency.app.get("/api/users/log/in/id=:id&pwd=:pwd", function(req, res){
         var status = {logged: false};
 
-        var user = users.getUserById(req.params.id);
+        var user = dependency.users.getUserById(req.params.id);
 
         if (user != null){
             //TODO hash password

@@ -1,9 +1,11 @@
-module.exports = function(app, dbConnection){
-	var users = require('./api/users/users.js');
-    var products = require('./api/products/products.js');
-    var purchases = require('./api/purchases/purchases.js');
-  
-    users.users(app, dbConnection);
-    products.products(app, dbConnection);
-	purchases.purchases(app, dbConnection, users, products);
+module.exports = function(container){
+	container.users = require('./api/users/users.js');
+    container.products = require('./api/products/products.js');
+    container.purchases = require('./api/purchases/purchases.js');
+    container.points = require('./api/points/points.js');
+
+    container.users.users(container);
+    container.products.products(container);
+	container.purchases.purchases(container);
+    container.points.points(container);
 }

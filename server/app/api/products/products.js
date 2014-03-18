@@ -1,7 +1,8 @@
 var async = require("async");
 
 var products = module.exports;
-var dbConnection = null;
+
+var dependency = null;
 
 
 /*
@@ -17,7 +18,7 @@ products.getPromotionContent = function(id, handleData){
 
         var params = [id];
 
-        dbConnection.query(query, params, function(err, rows, fields){
+        dependency.dbConnection.query(query, params, function(err, rows, fields){
             if (err) throw err;
             handleData(rows);
         });
@@ -40,7 +41,7 @@ products.getProduct = function(id, handleData){
 
     var params = [id];
 
-    dbConnection.query(query, params, function(err, rows, fields){
+    dependency.dbConnection.query(query, params, function(err, rows, fields){
         if (err) throw err;
         handleData(rows);
     });
@@ -61,7 +62,7 @@ products.getProductList = function(buyer_id, point_id, handleData){
                 FROM t_period_per per WHERE per.per_date_start <=  NOW()\
                 AND per.per_date_end >=  NOW() AND per.per_removed = 0";
 
-            dbConnection.query(query, null, function(err, rows, fields){
+            dependency.dbConnection.query(query, null, function(err, rows, fields){
                 if (err) throw err;
                 callback(null, rows[0].periods);
             });     
@@ -98,7 +99,7 @@ products.getProductList = function(buyer_id, point_id, handleData){
             var params = [point_id, periods, buyer_id, periods, 
                 periods, periods, point_id, buyer_id];
 
-            dbConnection.query(query, params, function(err, rows, fields){
+            dependency.dbConnection.query(query, params, function(err, rows, fields){
                 if (err) throw err;
                 handleData(rows);
                 callback(null);
@@ -112,10 +113,10 @@ products.getProductList = function(buyer_id, point_id, handleData){
     Init module
 */
 
-products.products = function(app, dbObject){
-    dbConnection = dbObject;
+products.products = function(container){
+    dependency = container;
 
-	app.get("/api/products/buyer_id=:buyer_id&point_id=:point_id", function(req, res){
+	dependency.app.get("/api/products/buyer_id=:buyer_id&point_id=:point_id", function(req, res){
         products.getProductList(req.params.buyer_id, req.params.point_id, function(data){
             res.json(data);
         });
