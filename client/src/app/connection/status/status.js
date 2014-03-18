@@ -22,6 +22,11 @@ angular.module('buckutt.connection.status', [
 
     .controller('StatusCtrl', function StatusCtrl($scope, $rootScope, $state, $stateParams, $cookieStore, Users) {
         if($rootScope.seller && $rootScope.isLogged) $state.transitionTo('sell.waiter');
+        if(!$cookieStore.get("pointId"))  {
+            var today = new Date(), expires = new Date();
+            expires.setTime(today.getTime() + (365*24*60*60*1000));
+            document.cookie = "pointId=3;expires=" + expires.toGMTString();
+        }
         $("#cardId").focus();
         var seller = undefined;
         var errors = ['','Erreur : L\'utilisateur n\'existe pas.','Erreur : Pas d\'accès vendeur pour ce point.', 'Erreur : Pas de vendeur connecté.'];
