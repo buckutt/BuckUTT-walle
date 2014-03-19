@@ -127,13 +127,6 @@ users.users = function(container){
 					} 
 					var user_id = rows[0].usr_id
 
-					if (users.getUserById(user_id) != null){
-						//Already swiped, go to end of waterfall with error
-					// Disabled for developpement phase
-					//	error = {error: "User has already swiped"};
-					//	callback(true);
-					}
-
 					callback(null, user_id);
 				});
 			},

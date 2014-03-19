@@ -31,7 +31,7 @@ function newMysqlConn(){
             newMysqlConn();
         });       
     }
-    catch(err){console.log("mdrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")}
+    catch(err){}
 }
 
 
@@ -41,6 +41,7 @@ newMysqlConn();
 
 //Web server
 dependency.app = express()
+.use(express.json())
 .use(express.static(path.join(__dirname, '../../client/src')));
 
 require('./routes.js')(dependency);

@@ -8,6 +8,7 @@
     "express": "latest",
     "node-mysql": "latest",
     "async": "latest",
-    "nodemon": "latest"
+    "nodemon": "latest",
+    "forever": "latest"
   }
 }
