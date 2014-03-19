@@ -1,22 +1,37 @@
+.bu-reload {
+    width:100%;
+    height:100%;
+}
+
+.bu-reload-interface {
+    width:650px;
+    margin:auto;
+}
+
 .bu-reload-types {
     width:200px;
-
+    float:left;
+    margin-right:100px;
 }
 
 .bu-reload-choice {
     display: inline-block;
     width:200px;
     height:60px;
+    margin-top:10px;
+    margin-bottom:10px;
 }
 
 .bu-reload-choice a {
-    display:block;
-    width:100%;
-    height:100%;
-    text-align:center;
+    display: block;
+    color: #5c5c5c;
+    padding: 15px 0;
+    font-size: 20px;
+    text-align: center;
+    background-color:#e5e5e5;
 }
 
-.bu-reload-choice a:active {
+.bu-reload-choice a:active, .bu-reload-choice.active a {
     background: #d5d5d5;
     color: #5c5c5c;
     text-decoration: none;
@@ -29,10 +44,9 @@
     width:350px;
     background: #d5d5d5;
     float:left;
-    margin-left:100px;
 }
 
-.bu-reload-digit #userPin {
+.bu-reload-digit #credit {
     width:100%;
     height:30px;
     font-size:30px;
@@ -74,4 +88,25 @@
 .bu-reload-digit-green {
     background:#58a89b;
     color:white;
+}
+
+.bu-reload-left {
+    float:left;
+}
+
+.bu-reload-message {
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    margin-top:40px;
+    margin-bottom:10px;
+}
+
+.bu-reload-message-confirm {
+    margin-bottom:20px;
+    font-size:20px;
+}
+
+.bu-reload-confirm:hover {
+    text-decoration:none;
 }

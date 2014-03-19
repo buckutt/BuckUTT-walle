@@ -20,12 +20,17 @@ angular.module('buckutt.reload', [
         return $resource('/api/reload/types', {}, {'get':  {method:'GET', isArray:true}});
     }])
 
-    .controller('ReloadCtrl', function ReloadCtrl($scope, $rootScope, $stateParams, $state, Types) {
+    .factory('Reloader', function($resource) {
+        return $resource('/api/reload');
+    })
+
+
+    .controller('ReloadCtrl', function ReloadCtrl($scope, $rootScope, $stateParams, $state, $cookieStore, Types, Reloader) {
         if($rootScope.seller == undefined) $state.transitionTo('connection.status', {error:1});
         if(!$rootScope.isReloader || !$rootScope.buyer) $state.transitionTo('sell.waiter');
 
         $scope.seller = $rootScope.seller;
-        $scope.credit = '';
+        $scope.credit = 0;
         var chosenType = 1;
 
         var getTypes = Types.get({}, function () {
@@ -33,7 +38,7 @@ angular.module('buckutt.reload', [
         });
 
         $scope.focusOnInput = function () {
-            $("#userPin").focus();
+            $("#credit").focus();
         };
 
         $scope.changeUserPin = function(value) {
@@ -41,8 +46,15 @@ angular.module('buckutt.reload', [
             else if(value == "x") $scope.userPin = $scope.userPin.substring(0,$scope.userPin.length-1);
         }
 
+        $scope.currentType = function() {
+            for(type in $scope.types) {
+                if(chosenType == $scope.types[type].rty_id) return $scope.types[type].rty_name;
+            }
+            return false;
+        }
+
         $scope.logout = function() {
-            $state.transitionTo("sell.waiter");
+            $state.transitionTo("sell.interface");
         };
 
         $scope.setType = function(type) {
@@ -50,11 +62,46 @@ angular.module('buckutt.reload', [
         }
 
         $scope.isActive = function(type) {
-            if (type == chosenType) {
+            if (type.rty_id == chosenType) {
                 return true;
             }
             return false;
         };
+
+        $scope.changeCredit = function(value) {
+            if(value == 'x') {
+                $scope.credit *= 100;
+                var modulo = $scope.credit % 10;
+                $scope.credit -= modulo;
+                $scope.credit /= 1000;
+            }
+            else {
+                $scope.credit *= 10*100;
+                $scope.credit += value;
+                $scope.credit /= 100;
+            }
+            $scope.credit = $scope.credit.toFixed(2);
+        }
+
+        $scope.valid = function() {
+            $scope.isValided = true;
+        }
+
+        $scope.confirm = function() {
+            if($rootScope.buyer.credit+$scope.credit*100 <= 10000) {
+                var params = {};
+                params.buyer_id = $rootScope.buyer.id;
+                params.seller_id = $rootScope.seller.id;
+                params.reload_type = chosenType;
+                params.point_id = $cookieStore.get("pointId");
+                params.credit = $scope.credit*100;
+                Reloader.save({}, params);
+
+                $state.transitionTo("sell.interface");
+            } else {
+                $scope.message_error = 'Le total dépasse 100€';
+            }
+        }
 
         $scope.focusOnInput();
     });
