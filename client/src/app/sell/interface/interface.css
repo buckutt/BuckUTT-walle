@@ -40,13 +40,14 @@
 }
 
 .bu-logout {
-    width: 150px;
+    width: 200px;
     float: right;
     text-align: right;
 }
+
 .bu-logout a {
     display: inline-block;
-    padding: 17px 40px 13px 40px;
+    padding: 17px 25px 13px 25px;
     color: #c9c7c8;
     font-size: 20px;
 }
@@ -203,7 +204,7 @@
 }
 
 .bu-choice-purchase {
-    height:60px;
+    height:45px;
     width:100%;
     background:#58a89b;
     margin-top:15px;
@@ -213,6 +214,13 @@
     height:100%;
     width:100%;
     display:block;
+    text-align:center;
+    color: #c9c7c8;
+    font-size: 25px;
+}
+
+.bu-choice-purchase i {
+    vertical-align:middle;
 }
 
 .bu-user-items-container {

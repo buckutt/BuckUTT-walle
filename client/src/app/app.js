@@ -4,7 +4,8 @@ angular.module('buckutt', [
   'ngCookies',
   'buckutt.sell',
   'buckutt.connection',
-  'buckutt.admin'
+  'buckutt.admin',
+  'buckutt.reload'
 ])
 
 .config(function myAppConfig($stateProvider, $urlRouterProvider) {

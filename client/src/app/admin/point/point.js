@@ -34,6 +34,14 @@ angular.module('buckutt.admin.point', [
             expires.setTime(today.getTime() + (365*24*60*60*1000));
             document.cookie = "pointId=" + encodeURIComponent(pointId) + ";expires=" + expires.toGMTString();
 
+            var seller = $rootScope.seller;
+            $rootScope.isSeller = false;
+            $rootScope.isReloader = false;
+            for(var key in seller.rights) {
+                if(seller.rights[key].poi_id == pointId && seller.rights[key].rig_id == 11) $rootScope.isSeller = true;
+                else if(seller.rights[key].poi_id == pointId && seller.rights[key].rig_id == 4) $rootScope.isReloader = true;
+            }
+
             $state.transitionTo('sell.waiter');
         };
     })

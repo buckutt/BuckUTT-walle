@@ -6,6 +6,9 @@
                         </div>
                     </div>
                     <div class="bu-logout">
+                        <a href="" ng-click="toReload()" ng-if="isReloader">
+                            <i class="glyphicon glyphicon-euro"></i>
+                        </a>
                         <a href="" ng-click="finish()">
                             <i class="glyphicon glyphicon-off"></i>
                         </a>
@@ -33,7 +36,7 @@
                             <div class="bu-user-item">
                                 <div class="bu-user-item-inner">
                                     <div class="item-remove">
-                                        <a href="" ng-click="deleteProduct(item, 'all')">
+                                        <a href="" ng-click="deleteProduct(item, 1)">
                                             <i class="glyphicon glyphicon-remove"></i>
                                         </a>
                                     </div>
@@ -47,21 +50,13 @@
                                     <div class="item-price">
                                         {{ (item.quantity*item.product.price).toFixed(2)/100 }} €
                                     </div>
-                                    <div class="item-edit" ng-if="!item.content">
-                                        <a href="">
-                                            <i class="glyphicon glyphicon-pencil"></i>
-                                        </a>
-                                    </div>
-                                    <div class="item-edit" ng-if="item.content">
-
-                                    </div>
                                 </div>
                             </div>
 
                         </div>
                     </div>
                     <div class="bu-choice-purchase">
-                        <a href="" ng-click="sendPurchases()"></a>
+                        <a href="" ng-click="sendPurchases()"><i class="glyphicon glyphicon-ok"></i></a>
                     </div>
                 </div>
                 <div class="bu-choices">

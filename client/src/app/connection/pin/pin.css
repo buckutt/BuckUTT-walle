@@ -32,10 +32,25 @@
 
 .bu-pin-digit td {
 	height:60px;
+    width:60px;
 	text-align:center;
 	font-weight:bold;
 	font-size:30px;
 	border: 1px solid #7D8987;
+}
+
+.bu-pin-digit td a {
+    display:inline-block;
+    width:100%;
+    height:100%;
+    text-decoration:none;
+    color: #5c5c5c;
+    padding-top:7px;
+}
+
+.bu-pin-digit td a i {
+    color:white;
+    margin-top:8px;
 }
 
 .bu-pin-digit-red {
@@ -44,7 +59,7 @@
 }
 
 .bu-pin-digit-green {
-	background:#01DF01;
+    background:#58a89b;
 	color:white;
 }
 

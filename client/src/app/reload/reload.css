@@ -1,0 +1,77 @@
+.bu-reload-types {
+    width:200px;
+
+}
+
+.bu-reload-choice {
+    display: inline-block;
+    width:200px;
+    height:60px;
+}
+
+.bu-reload-choice a {
+    display:block;
+    width:100%;
+    height:100%;
+    text-align:center;
+}
+
+.bu-reload-choice a:active {
+    background: #d5d5d5;
+    color: #5c5c5c;
+    text-decoration: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.bu-reload-digit {
+    width:350px;
+    background: #d5d5d5;
+    float:left;
+    margin-left:100px;
+}
+
+.bu-reload-digit #userPin {
+    width:100%;
+    height:30px;
+    font-size:30px;
+    font-weight:bold;
+    background:transparent;
+    border:0;
+    letter-spacing:5px;
+    text-align:center;
+}
+
+.bu-reload-digit td {
+    height:60px;
+    width:60px;
+    text-align:center;
+    font-weight:bold;
+    font-size:30px;
+    border: 1px solid #7D8987;
+}
+
+.bu-reload-digit td a {
+    display:inline-block;
+    width:100%;
+    height:100%;
+    text-decoration:none;
+    color: #5c5c5c;
+    padding-top:7px;
+}
+
+.bu-reload-digit td a i {
+    color:white;
+    margin-top:8px;
+}
+
+.bu-reload-digit-red {
+    background:#8A0808;
+    color:white;
+}
+
+.bu-reload-digit-green {
+    background:#58a89b;
+    color:white;
+}

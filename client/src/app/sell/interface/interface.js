@@ -38,6 +38,7 @@ angular.module('buckutt.sell.interface', [
             var promotions = [];
             var nbSteps = [];
             $scope.buyer = $rootScope.buyer;
+            $scope.isReloader = $rootScope.isReloader;
 
             $scope.loadProducts = function () {
                 var getProducts = Products.get({seller_id: $rootScope.seller.id, point_id: $cookieStore.get("pointId")}, function () {
@@ -206,21 +207,27 @@ angular.module('buckutt.sell.interface', [
             };
 
             $scope.sendPurchases = function() {
-                var params = {};
-                params.buyer_id = $scope.buyer.id;
-                params.seller_id = $rootScope.seller.id;
-                params.point_id = $cookieStore.get("pointId");
-                params.products = $scope.cart;
-                Purchases.save({}, params);
+                if($scope.cart.length > 0) {
+                    var params = {};
+                    params.buyer_id = $scope.buyer.id;
+                    params.seller_id = $rootScope.seller.id;
+                    params.point_id = $cookieStore.get("pointId");
+                    params.products = $scope.cart;
+                    Purchases.save({}, params);
 
-                $rootScope.lastBuyer = $scope.buyer;
-                $state.transitionTo('sell.waiter');
+                    $rootScope.lastBuyer = $scope.buyer;
+                }
+                $scope.finish();
             }
 
             $scope.finish = function() {
                 $rootScope.buyer = undefined;
                 $state.transitionTo("sell.waiter");
             };
+
+            $scope.toReload = function() {
+                $state.transitionTo("reload");
+            }
 
             var getObjectLength = function(object) {
                 var count = 0;
