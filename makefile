@@ -5,5 +5,7 @@ prod:
 		forever server/app/app.js
 
 install:
-	apt-get install nodejs
-	npm install ./server
+		add-apt-repository ppa:chris-lea/node.js  
+		apt-get update  
+		apt-get install nodejs
+		npm install ./server
