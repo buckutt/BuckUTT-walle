@@ -190,6 +190,7 @@
 
 .bu-choice .item-icon img {
     height:90px;
+    max-width:50px;
 }
 
 .bu-choice .item-infos {

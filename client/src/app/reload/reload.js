@@ -97,6 +97,8 @@ angular.module('buckutt.reload', [
                 params.credit = $scope.credit*100;
                 Reloader.save({}, params);
 
+                $rootScope.buyer.credit += $scope.credit*100;
+
                 $state.transitionTo("sell.interface");
             } else {
                 $scope.message_error = 'Le total dépasse 100€';
