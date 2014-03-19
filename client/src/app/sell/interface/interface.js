@@ -36,16 +36,11 @@ angular.module('buckutt.sell.interface', [
             $rootScope.isAdmin = false;
             $state.transitionTo('connection.status', {error:3});
         }
-        else if(!$rootScope.isSeller || !$rootScope.isReloader || !rootScope.isAdmin) {
-            $rootScope.isSeller = false;
-            $rootScope.isLogged = false;
-            $rootScope.seller = null;
-            $rootScope.isReloader = false;
-            $rootScope.isAdmin = false;
-            $state.transitionTo('connection.status', {error:2});
+        else if(!$rootScope.isSeller && !$rootScope.isReloader) {
+            $state.transitionTo('sell.waiter', {error:2});
         }
         if(!$rootScope.buyer) $state.transitionTo('sell.waiter', {error:1});
-        else {
+        else{
             var currentCategory = "Accueil";
             $scope.categories = [];
             var rawProducts = [];
@@ -252,7 +247,7 @@ angular.module('buckutt.sell.interface', [
                 return count;
             }
 
-            setTimeout($scope.loadProducts,100);
+            if($rootScope.isSeller) $scope.loadProducts();
         }
 
     })

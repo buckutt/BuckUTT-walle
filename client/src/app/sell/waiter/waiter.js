@@ -33,7 +33,7 @@ angular.module('buckutt.sell.waiter', [
             $rootScope.isAdmin = false;
             $state.transitionTo('connection.status', {error:3});
         }
-        else if(!$rootScope.isSeller || !$rootScope.isReloader || !rootScope.isAdmin) {
+        else if(!$rootScope.isSeller && !$rootScope.isReloader && !$rootScope.isAdmin) {
             $rootScope.isSeller = false;
             $rootScope.isLogged = false;
             $rootScope.seller = null;
@@ -45,7 +45,7 @@ angular.module('buckutt.sell.waiter', [
         $scope.isAdmin = $rootScope.isAdmin;
         $scope.lastBuyer = $rootScope.lastBuyer;
         var seller = undefined;
-        var errors = ['','Erreur : L\'utilisateur n\'existe pas.'];
+        var errors = ['','Erreur : L\'utilisateur n\'existe pas.','Erreur : pas d\'accès vendeur ou rechargeur pour ce point.'];
 
         $scope.pressEnter = function() {
             buyer = Users.get({data: $scope.cardId, mol: "4", point_id: $cookieStore.get("pointId")}, function(){
