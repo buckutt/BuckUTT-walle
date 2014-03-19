@@ -47,7 +47,7 @@ purchases.newPurchase = function(buyer_id, seller_id, point_id, cart){
                             totalPrice += price*item.quantity;
 
 
-                            var query = "INSERT INTO t_purchase_pur VALUES('', NOW(), ?, ?, ?, ?, ?, ?, ?, 'LOLOLOL', '0')";
+                            var query = "INSERT INTO t_purchase_pur VALUES('', NOW(), ?, ?, ?, ?, ?, ?, ?, 'wall-e API', '0')";
                             var params = [item.product.obj_type, item.product.obj_id, price, buyer_id, seller_id, point_id, fundation_id];
 
                             for (i = 0; i<item.quantity; i++){
