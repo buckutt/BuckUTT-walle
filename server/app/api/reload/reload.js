@@ -9,14 +9,15 @@ var dependency = null;
     Take a callback function to handle data
 */
 
-reload.reloadUser = function(buyer_id, seller_id, reload_type, credit, point_id, lol){
+reload.reloadUser = function(buyer_id, seller_id, reload_type, credit, point_id){
     var buyer = dependency.users.getUserById(buyer_id);
     var seller = dependency.users.getUserById(seller_id);
-   
+
     if ((buyer != null) && (seller != null)){                                            //Check if buyer and seller has both swiped
         if (seller.logged){                                                              //Check if seller is logged
             if (dependency.users.checkRights(seller.id, 4, point_id).hasRight == true){ //Check if seller has Right 
-
+                buyer.credit += credit;
+                
                 var query = "UPDATE ts_user_usr SET usr_credit=usr_credit+? WHERE usr_id=?";
                 var params = [credit, buyer.id];
                 dependency.dbConnection.query(query, params, function(err, rows, fields){
@@ -27,7 +28,6 @@ reload.reloadUser = function(buyer_id, seller_id, reload_type, credit, point_id,
                 params = [reload_type, buyer_id, seller_id, point_id, credit];
                 dependency.dbConnection.query(query, params, function(err, rows, truc){
                     if (err) throw err;
-                    lol();
                 });
             }  
             else{
@@ -68,6 +68,6 @@ reload.reload = function(container){
     });
 
     dependency.app.post("/api/reload", function(req, res){
-        reload.reloadUser(req.body.buyer_id, req.body.seller_id, req.body.reload_type, req.body.credit, req.body.point_id, function(){res.json({'lol': 'lol'})});
+        reload.reloadUser(req.body.buyer_id, req.body.seller_id, req.body.reload_type, req.body.credit, req.body.point_id);
     });
 }

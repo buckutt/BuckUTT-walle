@@ -111,6 +111,7 @@ users.users = function(container){
 
 	dependency.app.get("/api/users/data=:data&meanOfLogin=:meanOfLogin&point_id=:point_id", function(req, res){
 		var error = null;
+
 		//You MUST see async api.
 		async.waterfall([
 			function(callback){
@@ -126,6 +127,23 @@ users.users = function(container){
 						return;
 					} 
 					var user_id = rows[0].usr_id
+
+					//Already swiped
+					var user = users.getUserById(user_id);
+					if (user != null){
+						res.json(
+						{
+							id: user_id,
+							firstname: user.firstname,
+							lastname: user.lastname,
+							nickname: user.nickname,
+							credit: user.credit,
+							img_id: user.img_id,
+							rights: user.rights
+						});	
+						callback(true);
+						return;
+					}	
 
 					callback(null, user_id);
 				});

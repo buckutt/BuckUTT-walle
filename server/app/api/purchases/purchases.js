@@ -82,7 +82,8 @@ purchases.newPurchase = function(buyer_id, seller_id, point_id, cart){
                     var query = "UPDATE ts_user_usr SET usr_credit=usr_credit-? WHERE usr_id=?";
                     var params = [totalPrice, buyer.id];
                     queries.push({sql: query, "params": params});
-                    console.log(queries);
+                    
+                    buyer.credit -= totalPrice;
 
                     queries.forEach(function(query){
                         dependency.dbConnection.query(query.sql, query.params, function(err, res){
