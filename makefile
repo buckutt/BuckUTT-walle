@@ -5,7 +5,11 @@ prod:
 		forever server/app/app.js
 
 install:
-		add-apt-repository ppa:chris-lea/node.js  
-		apt-get update  
-		apt-get install nodejs
+		apt-get install python g++ make checkinstall
+		mkdir ~/node_js_src && cd $_
+		wget -N http://nodejs.org/dist/node-latest.tar.gz
+		tar xzvf node-latest.tar.gz && cd node-v*
+		./configure
+		checkinstall
+		sudo dpkg -i node_*
 		npm install ./server
