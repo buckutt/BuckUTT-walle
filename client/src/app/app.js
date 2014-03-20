@@ -31,6 +31,7 @@ angular.module('buckutt', [
 })
 
 .controller('AppCtrl', function AppCtrl($scope, $location) {
+        $(document).mousedown(function(){return false;});
 })
 
 ;
