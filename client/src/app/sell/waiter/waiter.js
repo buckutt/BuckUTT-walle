@@ -48,7 +48,7 @@ angular.module('buckutt.sell.waiter', [
         var errors = ['','Erreur : L\'utilisateur n\'existe pas.','Erreur : pas d\'accès vendeur ou rechargeur pour ce point.'];
 
         $scope.pressEnter = function() {
-            buyer = Users.get({data: $scope.cardId, mol: "4", point_id: $cookieStore.get("pointId")}, function(){
+            buyer = Users.get({data: $scope.cardId.replace(/(\s+)?.$/, ''), mol: "4", point_id: $cookieStore.get("pointId")}, function(){
                 if(buyer.error == "No entry") displayError(1);
                 else {
                     $rootScope.buyer = buyer;
