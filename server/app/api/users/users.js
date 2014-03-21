@@ -146,6 +146,8 @@ users.users = function(container){
 						return;
 					}	
 
+					//Update login time
+					user.login_time = new Date().getTime();
 					callback(null, user_id);
 				});
 			},
