@@ -69,7 +69,7 @@ products.getProductList = function(buyer_id, point_id, handleData){
         },
 
         function(periods, callback){
-            var query = "SELECT obj.obj_id, obj.obj_name, obj.obj_type, obj.obj_stock,\
+            var query = "SELECT obj.obj_id, obj.obj_name, obj.obj_type, obj.fun_id, obj.obj_stock,\
                 obj.obj_single, oli.obj_id_parent, obj.img_id,\
                 (select o.obj_name from t_object_obj o where o.obj_id = oli.obj_id_parent) AS category,\
                 MIN(pri.pri_credit) AS price FROM t_object_obj obj\

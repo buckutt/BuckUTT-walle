@@ -98,6 +98,7 @@ users.users = function(container){
 		users.userlist.forEach(function(user, index){
 			//TODO autodisconnect for logged user
 			if (((user.login_time + 180000) >= new Date().getTime()) && (user.logged == false)){
+				console.log("KICK " +user.id);
 				users.userlist.splice(index, 1);
 			}
 		});

@@ -9,7 +9,7 @@ var dependency = null;
     Take a callback function to handle data
 */
 
-reload.reloadUser = function(buyer_id, seller_id, reload_type, credit, point_id){
+reload.reloadUser = function(buyer_id, seller_id, reload_type, credit, point_id, handleData){
     var buyer = dependency.users.getUserById(buyer_id);
     var seller = dependency.users.getUserById(seller_id);
 
@@ -29,17 +29,22 @@ reload.reloadUser = function(buyer_id, seller_id, reload_type, credit, point_id)
                 dependency.dbConnection.query(query, params, function(err, rows, truc){
                     if (err) throw err;
                 });
+
+                handleData({ok: "ok"});
             }  
             else{
                 console.log("Seller has not the right to sell");
+                handleData({error: "Seller has not the right to sell"});
             }
         }
         else{
             console.log("Seller is not logged");
+            handleData({error: "Seller is not logged"});
         }
     }
     else{
         console.log("Someone didn't swipe");
+        handleData({error: "Someone didn't swipe"});
     }
 }
 
@@ -68,6 +73,8 @@ reload.reload = function(container){
     });
 
     dependency.app.post("/api/reload", function(req, res){
-        reload.reloadUser(req.body.buyer_id, req.body.seller_id, req.body.reload_type, req.body.credit, req.body.point_id);
+        reload.reloadUser(req.body.buyer_id, req.body.seller_id, req.body.reload_type, req.body.credit, req.body.point_id, function(data){
+            res.json(data);
+        });
     });
 }
