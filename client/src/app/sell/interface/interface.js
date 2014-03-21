@@ -47,6 +47,7 @@ angular.module('buckutt.sell.interface', [
             var products = {};
             var promotions = [];
             var nbSteps = [];
+            var nbCart = 0;
             $scope.buyer = $rootScope.buyer;
             $scope.isReloader = $rootScope.isReloader;
 
@@ -139,6 +140,7 @@ angular.module('buckutt.sell.interface', [
             $scope.addProduct = function(product) {
                 var backupCart = JSON.parse(JSON.stringify($scope.cart));
                 var backupCredit = $scope.buyer.credit;
+                var backupNbCart = nbCart;
 
                 var isFound = false;
                 for(item in $scope.cart) {
@@ -155,6 +157,7 @@ angular.module('buckutt.sell.interface', [
                 }
 
                 $scope.buyer.credit -= product.price;
+                nbCart++;
 
                 var uids = {};
                 var promos = {};
@@ -190,13 +193,15 @@ angular.module('buckutt.sell.interface', [
 
                             $scope.cart.push(promoItem);
                             $scope.buyer.credit -= promoItem.product.price;
+                            nbCart++;
                         }
                     }
                 }
 
-                if($scope.buyer.credit < 0) {
+                if($scope.buyer.credit < 0 || nbCart > 50) {
                     $scope.cart = JSON.parse(JSON.stringify(backupCart));
                     $scope.buyer.credit = backupCredit;
+                    nbCart = backupNbCart;
                 }
 
             };
@@ -213,6 +218,7 @@ angular.module('buckutt.sell.interface', [
                     } else {
                         $scope.cart[index].quantity -= nbItems;
                     }
+                    nbCart -= nbItems;
                 }
             };
 

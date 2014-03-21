@@ -22,6 +22,9 @@
 .bu-menu-item {
     display: table-cell;
     border-left: 1px solid #6a6869;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .bu-menu-item:first-child {
     border-left: 0;

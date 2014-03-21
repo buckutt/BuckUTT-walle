@@ -32,7 +32,7 @@ angular.module('buckutt.connection.status', [
         var errors = ['','Erreur : L\'utilisateur n\'existe pas.','Erreur : Pas d\'accès vendeur pour ce point.', 'Erreur : Pas de vendeur connecté.'];
 
         $scope.pressEnter = function() {
-            seller = Users.get({data: $scope.cardId, mol: "4", point_id: $cookieStore.get("pointId")}, function(){
+            seller = Users.get({data: $scope.cardId.replace(/(\s+)?.$/, ''), mol: "4", point_id: $cookieStore.get("pointId")}, function(){
                 if(seller.error) displayError(1);
                 else {
                     $rootScope.isSeller = false;
