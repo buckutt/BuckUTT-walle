@@ -45,7 +45,7 @@ angular.module('buckutt.sell.waiter', [
         $scope.isAdmin = $rootScope.isAdmin;
         $scope.lastBuyer = $rootScope.lastBuyer;
         var seller = undefined;
-        var errors = ['','Erreur : L\'utilisateur n\'existe pas.','Erreur : pas d\'accès vendeur ou rechargeur pour ce point.'];
+        var errors = ['','Erreur : L\'utilisateur n\'existe pas.','Erreur : pas d\'accès vendeur ou rechargeur pour ce point.','Erreur : l\'utilisateur a été déconnecté.'];
 
         $scope.pressEnter = function() {
             buyer = Users.get({data: $scope.cardId.replace(/(\s+)?.$/, ''), mol: "4", point_id: $cookieStore.get("pointId")}, function(){

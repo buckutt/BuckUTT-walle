@@ -95,7 +95,12 @@ angular.module('buckutt.reload', [
                 params.reload_type = chosenType;
                 params.point_id = $cookieStore.get("pointId");
                 params.credit = $scope.credit*100;
-                Reloader.save({}, params);
+                var rel = Reloader.save({}, params, function() {
+                    if(rel.error) {
+                        $rootScope.buyer = null;
+                        $state.transitionTo('sell.waiter', {error: 3});
+                    }
+                });
 
                 $rootScope.buyer.credit += $scope.credit*100;
 

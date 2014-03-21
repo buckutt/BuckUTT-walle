@@ -229,7 +229,15 @@ angular.module('buckutt.sell.interface', [
                     params.seller_id = $rootScope.seller.id;
                     params.point_id = $cookieStore.get("pointId");
                     params.products = $scope.cart;
-                    Purchases.save({}, params);
+                    params.lol = $rootScope.lol;
+                    var pur = Purchases.save({}, params, function() {
+                        if(pur.error) {
+                            $rootScope.buyer = null;
+                            $state.transitionTo('sell.waiter', {error: 3});
+                        }
+                    });
+                    console.log($rootScope.lol);
+                    $rootScope.lol++;
 
                     $rootScope.lastBuyer = $scope.buyer;
                 }
