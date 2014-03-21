@@ -142,6 +142,10 @@ users.users = function(container){
 							img_id: user.img_id,
 							rights: user.rights
 						});	
+
+						//Update login time
+						user.login_time = new Date().getTime();
+						
 						callback(true);
 						return;
 					}	
