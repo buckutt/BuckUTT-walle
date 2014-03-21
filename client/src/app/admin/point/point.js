@@ -44,5 +44,9 @@ angular.module('buckutt.admin.point', [
 
             $state.transitionTo('sell.waiter');
         };
+
+        $scope.finish = function() {
+            $state.transitionTo("sell.waiter");
+        };
     })
 ;
