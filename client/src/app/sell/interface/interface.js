@@ -239,6 +239,13 @@ angular.module('buckutt.sell.interface', [
                     console.log($rootScope.lol);
                     $rootScope.lol++;
 
+                    var totalCredit = 0;
+                    for(item in $scope.cart) {
+                        totalCredit += $scope.cart[item].product.price;
+                    }
+
+                    $rootScope.totalCredit = totalCredit;
+
                     $rootScope.lastBuyer = $scope.buyer;
                 }
                 $scope.finish();

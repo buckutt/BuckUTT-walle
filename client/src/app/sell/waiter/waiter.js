@@ -48,6 +48,7 @@ angular.module('buckutt.sell.waiter', [
         $("#cardId").focus();
         $scope.isAdmin = $rootScope.isAdmin;
         $scope.lastBuyer = $rootScope.lastBuyer;
+        $scope.totalCredit = $rootScope.totalCredit;
         $scope.pointId = $rootScope.pointId;
 
         var seller = undefined;

@@ -69,6 +69,7 @@ angular.module('buckutt.reload', [
         };
 
         $scope.changeCredit = function(value) {
+            var backupCredit = $scope.credit;
             if(value == 'x') {
                 $scope.credit *= 100;
                 var modulo = $scope.credit % 10;
@@ -81,6 +82,10 @@ angular.module('buckutt.reload', [
                 $scope.credit /= 100;
             }
             $scope.credit = $scope.credit.toFixed(2);
+
+            if($rootScope.buyer.credit+$scope.credit*100 > 10000) {
+                $scope.credit = backupCredit;
+            }
         }
 
         $scope.valid = function() {
