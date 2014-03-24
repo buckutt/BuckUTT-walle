@@ -24,7 +24,11 @@ angular.module('buckutt.sell.waiter', [
         return $resource('/api/users/log/out/id=:id', {id: ""});
     })
 
-    .controller('WaiterCtrl', function WaiterCtrl($scope, $rootScope, $state, $stateParams, $cookieStore, Users, Logout) {
+    .factory('Points', ['$resource', function($resource) {
+        return $resource('/api/points', {}, {'get':  {method:'GET', isArray:true}});
+    }])
+
+    .controller('WaiterCtrl', function WaiterCtrl($scope, $rootScope, $state, $stateParams, $cookieStore, Users, Logout, Points) {
         if(!$rootScope.isLogged) {
             $rootScope.isSeller = false;
             $rootScope.isLogged = false;
@@ -44,8 +48,20 @@ angular.module('buckutt.sell.waiter', [
         $("#cardId").focus();
         $scope.isAdmin = $rootScope.isAdmin;
         $scope.lastBuyer = $rootScope.lastBuyer;
+        $scope.pointId = $rootScope.pointId;
+
         var seller = undefined;
         var errors = ['','Erreur : L\'utilisateur n\'existe pas.','Erreur : pas d\'accès vendeur ou rechargeur pour ce point.','Erreur : l\'utilisateur a été déconnecté.'];
+
+        var getPoints = Points.get({}, function () {
+            $scope.points = getPoints;
+        });
+
+        $scope.getPointById = function(id) {
+            for(point in getPoints) {
+                if(getPoints[point].poi_id == id) return getPoints[point];
+            }
+        };
 
         $scope.pressEnter = function() {
             buyer = Users.get({data: $scope.cardId.replace(/(\s+)?.$/, ''), mol: "4", point_id: $cookieStore.get("pointId")}, function(){

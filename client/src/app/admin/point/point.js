@@ -25,7 +25,6 @@ angular.module('buckutt.admin.point', [
         if(!$rootScope.isAdmin) $state.transitionTo('connection.status');
 
         var getPoints = Points.get({}, function () {
-            console.log(getPoints);
             $scope.points = getPoints;
         });
 
@@ -41,7 +40,8 @@ angular.module('buckutt.admin.point', [
                 if(seller.rights[key].poi_id == pointId && seller.rights[key].rig_id == 11) $rootScope.isSeller = true;
                 else if(seller.rights[key].poi_id == pointId && seller.rights[key].rig_id == 4) $rootScope.isReloader = true;
             }
-
+            
+            $rootScope.pointId = pointId;
             $state.transitionTo('sell.waiter');
         };
 

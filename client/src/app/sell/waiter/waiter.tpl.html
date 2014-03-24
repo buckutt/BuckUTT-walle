@@ -1,17 +1,20 @@
 <div class="bu-waiter" ng-click="focusOnInput()">
     <div class="bu-waiter-header">
-        <div class="bu-menu" ng-if="isAdmin">
-            <div class="bu-menu-item">
-                <a href="" ng-click="changeMenu('point')">Changer point</a>
-            </div>
-            <div class="bu-menu-item">
-                <a href="" ng-click="changeMenu('admin')">Admin logout</a>
-            </div>
-        </div>
         <div class="bu-waiter-logout">
             <a href="" ng-click="logout()">
                 <i class="glyphicon glyphicon-off"></i>
             </a>
+        </div>
+        <div class="bu-menu">
+            <div class="bu-menu-item">
+                <a href="">{{ getPointById(pointId).poi_name }}</a>
+            </div>
+            <div class="bu-menu-item" ng-if="isAdmin">
+                <a href="" ng-click="changeMenu('point')">Changer point</a>
+            </div>
+            <div class="bu-menu-item" ng-if="isAdmin">
+                <a href="" ng-click="changeMenu('admin')">Admin logout</a>
+            </div>
         </div>
         <div class="clearfix"></div>
     </div>

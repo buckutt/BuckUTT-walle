@@ -29,8 +29,8 @@
 
 .bu-waiter-logout {
     width: 150px;
-    float: right;
-    text-align: right;
+    float: left;
+    text-align: left;
 }
 .bu-waiter-logout a {
     display: inline-block;

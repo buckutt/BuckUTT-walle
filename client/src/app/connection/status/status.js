@@ -26,7 +26,8 @@ angular.module('buckutt.connection.status', [
             var today = new Date(), expires = new Date();
             expires.setTime(today.getTime() + (365*24*60*60*1000));
             document.cookie = "pointId=3;expires=" + expires.toGMTString();
-        }
+            $rootScope.pointId = 3;
+        } else $rootScope.pointId = $cookieStore.get("pointId");
         $("#cardId").focus();
         var seller = undefined;
         var errors = ['','Erreur : L\'utilisateur n\'existe pas.','Erreur : Pas d\'accès vendeur pour ce point.', 'Erreur : Pas de vendeur connecté.'];
