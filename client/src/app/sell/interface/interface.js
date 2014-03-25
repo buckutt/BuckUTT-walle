@@ -234,19 +234,19 @@ angular.module('buckutt.sell.interface', [
                         if(pur.error) {
                             $rootScope.buyer = null;
                             $state.transitionTo('sell.waiter', {error: 3});
+                        } else {
+                            var totalCredit = 0;
+                            for(item in $scope.cart) {
+                                totalCredit += $scope.cart[item].product.price*$scope.cart[item].quantity;
+                            }
+
+                            $rootScope.totalCredit = totalCredit;
+
+                            $rootScope.lastBuyer = $scope.buyer;
                         }
                     });
                     console.log($rootScope.lol);
                     $rootScope.lol++;
-
-                    var totalCredit = 0;
-                    for(item in $scope.cart) {
-                        totalCredit += $scope.cart[item].product.price*$scope.cart[item].quantity;
-                    }
-
-                    $rootScope.totalCredit = totalCredit;
-
-                    $rootScope.lastBuyer = $scope.buyer;
                 }
                 $scope.finish();
             }
