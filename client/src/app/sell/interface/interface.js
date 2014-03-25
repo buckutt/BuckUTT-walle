@@ -241,7 +241,7 @@ angular.module('buckutt.sell.interface', [
 
                     var totalCredit = 0;
                     for(item in $scope.cart) {
-                        totalCredit += $scope.cart[item].product.price;
+                        totalCredit += $scope.cart[item].product.price*$scope.cart[item].quantity;
                     }
 
                     $rootScope.totalCredit = totalCredit;
