@@ -110,6 +110,9 @@ angular.module('buckutt.reload', [
 
                         $state.transitionTo("sell.interface");
                     }
+                },
+                function () {
+                    alert('Erreur: le réseau a été perdu');
                 });
             } else {
                 $scope.message_error = 'Le total dépasse 100€';

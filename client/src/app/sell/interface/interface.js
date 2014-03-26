@@ -245,6 +245,9 @@ angular.module('buckutt.sell.interface', [
                             $rootScope.lastBuyer = $scope.buyer;
                             $scope.finish();
                         }
+                    },
+                    function () {
+                        alert('Erreur: le réseau a été perdu');
                     });
                     console.log($rootScope.lol);
                     $rootScope.lol++;
