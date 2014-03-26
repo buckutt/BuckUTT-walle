@@ -257,6 +257,8 @@ angular.module('buckutt.sell.interface', [
             };
 
             $scope.toReload = function() {
+                $rootScope.buyer.credit = $rootScope.realCredit;
+                $scope.buyer.credit = $rootScope.realCredit;
                 $state.transitionTo("reload");
             }
 
