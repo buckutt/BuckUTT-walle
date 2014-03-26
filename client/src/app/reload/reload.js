@@ -104,12 +104,13 @@ angular.module('buckutt.reload', [
                     if(rel.error) {
                         $rootScope.buyer = null;
                         $state.transitionTo('sell.waiter', {error: 3});
+                    } else {
+
+                        $rootScope.buyer.credit += $scope.credit*100;
+
+                        $state.transitionTo("sell.interface");
                     }
                 });
-
-                $rootScope.buyer.credit += $scope.credit*100;
-
-                $state.transitionTo("sell.interface");
             } else {
                 $scope.message_error = 'Le total dépasse 100€';
             }

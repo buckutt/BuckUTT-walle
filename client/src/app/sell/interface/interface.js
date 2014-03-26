@@ -241,14 +241,13 @@ angular.module('buckutt.sell.interface', [
                             }
 
                             $rootScope.totalCredit = totalCredit;
-
                             $rootScope.lastBuyer = $scope.buyer;
+                            $scope.finish();
                         }
                     });
                     console.log($rootScope.lol);
                     $rootScope.lol++;
                 }
-                $scope.finish();
             }
 
             $scope.finish = function() {
