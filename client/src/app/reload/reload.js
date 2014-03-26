@@ -83,7 +83,7 @@ angular.module('buckutt.reload', [
             }
             $scope.credit = $scope.credit.toFixed(2);
 
-            if($rootScope.buyer.credit+$scope.credit*100 > 10000) {
+            if($rootScope.realCredit+$scope.credit*100 > 10000) {
                 $scope.credit = backupCredit;
             }
         }
@@ -93,7 +93,7 @@ angular.module('buckutt.reload', [
         }
 
         $scope.confirm = function() {
-            if($rootScope.buyer.credit+$scope.credit*100 <= 10000) {
+            if($rootScope.realCredit+$scope.credit*100 <= 10000) {
                 var params = {};
                 params.buyer_id = $rootScope.buyer.id;
                 params.seller_id = $rootScope.seller.id;

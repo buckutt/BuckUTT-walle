@@ -50,6 +50,7 @@ angular.module('buckutt.sell.interface', [
             var nbCart = 0;
             $scope.buyer = $rootScope.buyer;
             $scope.isReloader = $rootScope.isReloader;
+            $rootScope.realCredit = $rootScope.buyer.credit;
 
             $scope.loadProducts = function () {
                 var getProducts = Products.get({buyer_id: $scope.buyer.id, point_id: $cookieStore.get("pointId")}, function () {
