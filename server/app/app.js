@@ -38,11 +38,14 @@ function newMysqlConn(){
 newMysqlConn();
 
 
-
 //Web server
 dependency.app = express()
 .use(express.json())
 .use(express.static(path.join(__dirname, '../../client/src')));
+
+dependency.app.use(function(req, res, next){
+    res.sendfile(path.resolve('client/src/assets/img/404.png'));
+});
 
 require('./routes.js')(dependency);
 
