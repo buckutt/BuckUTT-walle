@@ -97,7 +97,7 @@ users.users = function(container){
 	setInterval(function(){
 		users.userlist.forEach(function(user, index){
 			//TODO autodisconnect for logged user
-			if (((user.login_time + 360000) >= new Date().getTime()) && (user.logged == false)){
+			if (((user.login_time + 360000) < new Date().getTime()) && (user.logged == false)){
 				console.log("KICK " +user.id);
 				users.userlist.splice(index, 1);
 			}
