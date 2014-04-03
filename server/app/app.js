@@ -45,7 +45,6 @@ dependency.app = express()
 
 require('./routes.js')(dependency);
 
-//404 error
 dependency.app.use(function(req, res, next){
     res.sendfile(path.resolve('client/src/assets/img/404.png'));
 });
