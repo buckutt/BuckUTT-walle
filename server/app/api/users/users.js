@@ -93,11 +93,11 @@ users.users = function(container){
 	//Instanciate children routes first
 	users.children = require("./users.routes.js")(container);
 
-	//Remove users from userlist every 360sec
+	//Remove users from userlist every 10min
 	setInterval(function(){
 		users.userlist.forEach(function(user, index){
 			//TODO autodisconnect for logged user
-			if (((user.login_time + 360000) >= new Date().getTime()) && (user.logged == false)){
+			if (((user.login_time + 10*60*1000) < new Date().getTime()) && (user.logged == false)){
 				console.log("KICK " +user.id);
 				users.userlist.splice(index, 1);
 			}
