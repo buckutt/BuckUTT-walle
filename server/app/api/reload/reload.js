@@ -55,7 +55,7 @@ reload.reloadUser = function(buyer_id, seller_id, reload_type, credit, point_id,
 */
 
 reload.getReloadTypes = function(handleData){
-    var query = "SELECT * FROM t_recharge_type_rty WHERE rty_type='PBUY' AND rty_removed=0";
+    var query = "SELECT * FROM t_recharge_type_rty WHERE rty_type = 'PBUY' AND rty_removed = 0";
 
     dependency.dbConnection.query(query, null, function(err, rows, fields){
         handleData(rows);

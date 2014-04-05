@@ -14,7 +14,8 @@ var dependency = null;
 products.getPromotionContent = function(id, handleData){
     var query = "SELECT *\
         FROM `tj_object_link_oli`\
-        WHERE obj_id_parent =?";
+        WHERE obj_id_parent = ? \
+		AND oli_removed = 0";
 
         var params = [id];
 
@@ -37,7 +38,8 @@ products.getProduct = function(id, handleData){
         ON t_price_pri.obj_id = tj_object_link_oli.obj_id_child\
         LEFT JOIN `t_object_obj`\
         ON t_price_pri.obj_id = t_object_obj.obj_id\
-        WHERE t_price_pri.obj_id=?  AND t_price_pri.pri_removed != 1 AND (tj_object_link_oli.oli_removed != 1 OR tj_object_link_oli.oli_removed IS NULL)";
+        WHERE t_price_pri.obj_id0 = ?  AND t_price_pri.pri_removed = 0 AND t_object_obj.obj_removed = 0 \
+		AND (tj_object_link_oli.oli_removed = 0 OR tj_object_link_oli.oli_removed IS NULL)";
 
     var params = [id];
 
@@ -83,10 +85,6 @@ products.getProductList = function(buyer_id, point_id, handleData){
                                     FROM tj_usr_grp_jug jug\
                                     WHERE jug.usr_id =  ?\
                                     AND find_in_set(jug.per_id, ?))\
-                AND exists(SELECT sal.sal_id FROM t_sale_sal sal\
-                    WHERE find_in_set(sal.per_id, ?)\
-                    AND sal.obj_id = obj.obj_id\
-                    AND sal.sal_removed = 0 )\
                 AND (obj.obj_stock > 0 OR obj.obj_stock = -1 ) AND obj.obj_removed = 0 AND pri.pri_removed = 0\
                 GROUP BY obj.obj_id ORDER BY jop.jop_priority ASC, obj.obj_name ASC";
 

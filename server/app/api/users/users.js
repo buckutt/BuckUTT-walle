@@ -154,7 +154,12 @@ users.users = function(container){
 			},
 
 			function(user_id, callback){
-				var query = "SELECT rig.rig_id As rig_id, rig.rig_name As rig_name, rig.rig_admin As rig_admin, jur.fun_id As fun_id, jur.poi_id As poi_id, fun_name FROM ts_right_rig rig, t_period_per per, tj_usr_rig_jur jur LEFT JOIN t_fundation_fun fun ON fun.fun_id = jur.fun_id WHERE jur.usr_id = ? AND rig.rig_id = jur.rig_id AND per.per_id = jur.per_id AND jur.jur_removed = '0' AND rig.rig_removed = '0' AND per.per_date_start <= NOW() AND per.per_date_end >= NOW()";
+				var query = "SELECT rig.rig_id As rig_id, rig.rig_name As rig_name, rig.rig_admin As rig_admin, jur.fun_id As fun_id, jur.poi_id As poi_id, fun_name \
+							 FROM ts_right_rig rig, t_period_per per, tj_usr_rig_jur jur \
+							 LEFT JOIN t_fundation_fun fun ON fun.fun_id = jur.fun_id \
+							 WHERE AND rig.rig_id = jur.rig_id AND per.per_id = jur.per_id \
+							 AND jur.usr_id = ? AND per.per_date_start <= NOW() AND per.per_date_end >= NOW() \
+							 AND jur.jur_removed = 0 AND rig.rig_removed = 0 AND per.per_removed = 0";
 				var params = [user_id];
 
 				dependency.dbConnection.query(query, params, function(err, rows, fields){
