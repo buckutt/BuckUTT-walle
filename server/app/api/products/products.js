@@ -84,8 +84,9 @@ products.getProductList = function(buyer_id, point_id, handleData){
                 AND pri.grp_id IN(SELECT jug.grp_id\
                                     FROM tj_usr_grp_jug jug\
                                     WHERE jug.usr_id =  ?\
-                                    AND find_in_set(jug.per_id, ?))\
-                AND (obj.obj_stock > 0 OR obj.obj_stock = -1 ) AND obj.obj_removed = 0 AND pri.pri_removed = 0\
+                                    AND jug.jug_removed = 0 \
+									AND find_in_set(jug.per_id, ?))\
+                AND (obj.obj_stock > 0 OR obj.obj_stock = -1 ) AND obj.obj_removed = 0\
                 GROUP BY obj.obj_id ORDER BY jop.jop_priority ASC, obj.obj_name ASC";
 
             var params = [point_id, periods, buyer_id, periods, periods];
