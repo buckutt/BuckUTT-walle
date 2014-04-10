@@ -46,7 +46,7 @@
     float:left;
 }
 
-.bu-reload-digit #credit {
+.bu-reload-digit #credit, .bu-reload-boxes #credit {
     width:100%;
     height:30px;
     font-size:24px;
@@ -66,18 +66,25 @@
     border: 1px solid #7D8987;
 }
 
-.bu-reload-digit td a {
+.bu-reload-digit td a, .bu-reload-boxes a {
     display:inline-block;
     width:100%;
     height:100%;
     text-decoration:none;
     color: #5c5c5c;
     padding-top:7px;
+    text-align:center;
+    font-weight:bold;
+    font-size:30px;
 }
 
 .bu-reload-digit td a i {
     color:white;
     margin-top:8px;
+}
+
+.bu-reload-box a i {
+    color:white;
 }
 
 .bu-reload-digit-red {
@@ -107,6 +114,28 @@
     font-size:20px;
 }
 
+.bu-reload-confirm {
+    display:inline-block;
+    text-align:center;
+    width:200px;
+    height:52px;
+    padding-top:10px;
+}
+
 .bu-reload-confirm:hover {
     text-decoration:none;
+}
+
+.bu-reload-boxes {
+    float:left;
+    width:350px;
+}
+
+.bu-reload-box {
+    width:100px;
+    height:80px;
+    margin-left:10px;
+    margin-top:10px;
+    background:#e5e5e5;
+    display:inline-block;
 }

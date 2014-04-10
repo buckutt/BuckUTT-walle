@@ -14,7 +14,7 @@
                 {{ message_error }}<br />
                 {{ buyer.firstname }} {{ buyer.lastname }}<br />
                 veut recharger {{ credit }}€ par {{ currentType() }}<br />
-                <a href="" ng-click="confirm()" class="bu-reload-confirm">Confirmer</a>
+                <a href="" ng-click="confirm()" class="bu-reload-confirm bu-reload-digit-green">Confirmer</a>
             </div>
             Choisir le mode de paiement et le montant désiré
         </div>
@@ -25,7 +25,7 @@
             <div class="bu-reload-choice" ng-class="{active: isActive(type)}" ng-repeat="type in types"><a href="" ng-click="setType(type)">{{ type.rty_name }}</a></div>
         </div>
 
-        <table class="bu-reload-digit">
+        <table class="bu-reload-digit" ng-if="digits">
             <tr>
                 <th colspan="3">
                     <form>
@@ -46,5 +46,17 @@
                 <td class="bu-pin-digit-red" ng-click="changeCredit('x')"><a href=""><i class="glyphicon glyphicon-remove"></i></a></td><td ng-click="changeCredit(0)"><a href="">0</a></td><td class="bu-pin-digit-green" ng-click="valid()"><a href=""><i class="glyphicon glyphicon-ok"></i></a></td>
             </tr>
         </table>
+
+        <div class="bu-reload-boxes" ng-if="boxes">
+            <form>
+                <input type="text" ng-model="credit" id="credit"/>
+            </form>
+            <div class="bu-reload-box" ng-click="replaceCredit(1)"><a href="">1</a></div>
+            <div class="bu-reload-box" ng-click="replaceCredit(2)"><a href="">2</a></div>
+            <div class="bu-reload-box" ng-click="replaceCredit(3)"><a href="">3</a></div>
+            <div class="bu-reload-box" ng-click="replaceCredit(4)"><a href="">4</a></div>
+            <div class="bu-reload-box" ng-click="replaceCredit(5)"><a href="">5</a></div>
+            <div class="bu-reload-box" ng-click="valid()"><a href="" class="bu-pin-digit-green"><i class="glyphicon glyphicon-ok"></i></a></div>
+        </div>
     </div>
 </div>

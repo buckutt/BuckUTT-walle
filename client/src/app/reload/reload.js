@@ -32,6 +32,8 @@ angular.module('buckutt.reload', [
         $scope.seller = $rootScope.seller;
         $scope.credit = 0;
         var chosenType = 1;
+        $scope.digits = true;
+        $scope.boxes = false;
 
         var getTypes = Types.get({}, function () {
             $scope.types = getTypes;
@@ -59,6 +61,14 @@ angular.module('buckutt.reload', [
 
         $scope.setType = function(type) {
             chosenType = type.rty_id;
+            if(type.rty_mode == "boxes") {
+                $scope.boxes = true;
+                $scope.digits = false;
+            } else {
+                $scope.digits = true;
+                $scope.boxes = false;
+            }
+            $scope.isValided = false;
         }
 
         $scope.isActive = function(type) {
@@ -82,10 +92,15 @@ angular.module('buckutt.reload', [
                 $scope.credit /= 100;
             }
             $scope.credit = $scope.credit.toFixed(2);
+            $scope.isValided = false;
 
             if($rootScope.realCredit+$scope.credit*100 > 10000) {
                 $scope.credit = backupCredit;
             }
+        }
+
+        $scope.replaceCredit = function(value) {
+            $scope.credit = value;
         }
 
         $scope.valid = function() {
