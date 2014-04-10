@@ -208,10 +208,11 @@
 }
 
 .bu-choice-purchase {
-    height:45px;
+    height:65px;
     width:100%;
     background:#58a89b;
     margin-top:15px;
+    padding-top:10px;
 }
 
 .bu-choice-purchase a {
@@ -228,7 +229,7 @@
 }
 
 .bu-user-items-container {
-    height:533px;
+    height:513px;
     padding-top:10px;
     overflow:hidden;
 }
