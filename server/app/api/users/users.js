@@ -181,13 +181,8 @@ users.users = function(container){
 
 					var user = users.getUserById(user_id);
 					var data = rows[0];
-					
-					if (user != null){
-						// If user is logged, increment the inst number
-						if (user.logged == true){
-							user.inst ++;
-						}
 
+					if (user != null){
 						//Update login time
 						user.login_time = new Date().getTime()
 					}
