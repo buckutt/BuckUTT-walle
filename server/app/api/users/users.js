@@ -180,7 +180,8 @@ users.users = function(container){
 					if (rows.length > 1) console.log("ERROR api/users multiple entry for params:"+params);
 
 					var user = users.getUserById(user_id);
-
+					var data = rows[0];
+					
 					if (user != null){
 						// If user is logged, increment the inst number
 						if (user.logged == true){
@@ -192,7 +193,6 @@ users.users = function(container){
 					}
 					else
 					{
-						var data = rows[0];
 						var user = {
 							id: user_id,
 							password: data.usr_pwd,						

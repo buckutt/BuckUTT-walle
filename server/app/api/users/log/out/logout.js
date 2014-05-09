@@ -15,12 +15,12 @@ logout.logout = function(container){
         var user = dependency.users.getUserById(req.params.id);
 
         if ((user != null) && (user.logged == true)){
-            if (user.inst > 1){
+            if (user.inst > 0){
                 user.inst--;
             }
-            else{
-               user.logged = false;
-               res.json({logged: false});
+            if (user.inst == 0){
+                user.logged = false;
+                res.json({logged: false});
             }
         }
         else{
