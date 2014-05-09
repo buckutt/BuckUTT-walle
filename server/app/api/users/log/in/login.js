@@ -19,6 +19,7 @@ login.login = function(container){
             //TODO hash password
             if (user.password == req.params.pwd){
                 user.logged = true;
+                user.inst++;
                 status.logged = true;
             }
             res.json(status);

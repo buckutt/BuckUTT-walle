@@ -179,26 +179,42 @@ users.users = function(container){
 					if (err) throw err;
 					if (rows.length > 1) console.log("ERROR api/users multiple entry for params:"+params);
 
-					var data = rows[0];
-					var user = {
-						id: user_id,
-						password: data.usr_pwd
-,						firstname: data.usr_firstname,
-						lastname: data.usr_lastname,
-						nickname: data.usr_nickname,
-						mail: data.usr_mail,
-						rights: rights,
-						credit: data.usr_credit,
-						img_id: data.img_id,
-						rights: rights,
-						temporary: 0,
-						fail_auth: data.usr_fail_auth,
-						blocked: data.usr_blocked,
-						point_id: req.params.point_id,
-						logged: false,
-						login_time: new Date().getTime()
-					};		
-					users.userlist.push(user);
+					var user = users.getUserById(user_id);
+
+					if (user != null){
+						// If user is logged, increment the inst number
+						if (user.logged == true){
+							user.inst ++;
+						}
+
+						//Update login time
+						user.login_time = new Date().getTime()
+					}
+					else
+					{
+						var data = rows[0];
+						var user = {
+							id: user_id,
+							password: data.usr_pwd,						
+							firstname: data.usr_firstname,
+							lastname: data.usr_lastname,
+							nickname: data.usr_nickname,
+							mail: data.usr_mail,
+							rights: rights,
+							credit: data.usr_credit,
+							img_id: data.img_id,
+							rights: rights,
+							temporary: 0,
+							fail_auth: data.usr_fail_auth,
+							blocked: data.usr_blocked,
+							point_id: req.params.point_id,
+							logged: false,
+							inst: 0,
+							login_time: new Date().getTime()
+						};		
+						users.userlist.push(user);;								
+					}
+
 
 					res.json({
 						id: user_id,
@@ -208,8 +224,8 @@ users.users = function(container){
 						credit: data.usr_credit,
 						img_id: data.img_id,
 						rights: rights
-					});		
-
+					})
+					
 					callback(null);
 				});
 
