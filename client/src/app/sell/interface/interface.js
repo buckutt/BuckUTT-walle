@@ -46,11 +46,26 @@ angular.module('buckutt.sell.interface', [
             var rawProducts = [];
             var products = {};
             var promotions = [];
+            var promotionsIds = [];
             var nbSteps = [];
             var nbCart = 0;
             $scope.buyer = $rootScope.buyer;
             $scope.isReloader = $rootScope.isReloader;
             $rootScope.realCredit = $rootScope.buyer.credit;
+
+            var definePromotions = function(id) {
+                var getPromotions = Promotions.get({promotion_id: promotionsIds[id]}, function () {
+                                if(getPromotions[0]) {
+                                    promotions[getPromotions[0].obj_id_parent] = getPromotions;
+                                    var maxPromo = 0;
+                                    for(promotion in getPromotions) {
+                                        if(getPromotions[promotion].oli_step > maxPromo) maxPromo = getPromotions[promotion].oli_step;
+                                        nbSteps[getPromotions[promotion].obj_id_parent] = maxPromo;
+                                    }
+                                }
+                            });
+                if(promotionsIds[(id+1)]) definePromotions(id+1);
+            }
 
             $scope.loadProducts = function () {
                 var getProducts = Products.get({buyer_id: $scope.buyer.id, point_id: $cookieStore.get("pointId")}, function () {
@@ -69,22 +84,14 @@ angular.module('buckutt.sell.interface', [
                         }
                         if(product.obj_type == "product") products[product.category].push(product);
                         else if(product.obj_type == "promotion") {
-                            var getPromotions = Promotions.get({promotion_id: product.obj_id}, function () {
-                                if(getPromotions[0]) {
-                                    promotions[getPromotions[0].obj_id_parent] = getPromotions;
-                                    var maxPromo = 0;
-                                    for(promotion in getPromotions) {
-                                        if(getPromotions[promotion].oli_step > maxPromo) maxPromo = getPromotions[promotion].oli_step;
-                                        nbSteps[getPromotions[promotion].obj_id_parent] = maxPromo;
-                                    }
-                                }
-
-                            });
+                            promotionsIds.push(product.obj_id);
                         }
                     }
+                    if(promotionsIds[0]) definePromotions(0);
                     $scope.switchCategory(currentCategory);
                     $scope.actualProducts = products[currentCategory];
                     $scope.cart = [];
+
                 });
             };
 
@@ -129,13 +136,15 @@ angular.module('buckutt.sell.interface', [
                 return false;
             }
 
-            var getStep = function(product, promo) {
+            var getSteps = function(product, promo) {
+                var steps = [];
                 var lowerProduct = getLowestLevel(product);
                 for(step in promotions[promo]) {
                     if(lowerProduct.obj_id == promotions[promo][step].obj_id_child) {
-                        return promotions[promo][step].oli_step;
+                        steps.push(promotions[promo][step].oli_step);
                     }
                 }
+                return steps;
             }
 
             $scope.addProduct = function(product) {
@@ -168,7 +177,15 @@ angular.module('buckutt.sell.interface', [
                     if(promos[promotion] == undefined) promos[promotion] = {};
                     for(item in $scope.cart) {
                         for(var i= 1;i<=$scope.cart[item].quantity;i++) {
-                            var currentStep = getStep($scope.cart[item].product,promotion);
+                            var steps = getSteps($scope.cart[item].product,promotion);
+                            var currentStep = steps[0];
+                            var currentUid = uids[promotion][currentStep];
+                            for(step in steps) {
+                                if(uids[promotion][steps[step]] < currentUid || uids[promotion][steps[step]] == undefined) {
+                                    currentStep = steps[step];
+                                    currentUid = uids[promotion][currentStep];
+                                }
+                            }
                             if(uids[promotion][currentStep] == undefined) uids[promotion][currentStep] = 0;
                             if(promos[promotion][uids[promotion][currentStep]] == undefined) promos[promotion][uids[promotion][currentStep]] = {};
                             if(isPromotion($scope.cart[item].product,promotion) && currentStep) {
@@ -249,7 +266,6 @@ angular.module('buckutt.sell.interface', [
                     function () {
                         alert('Erreur: le réseau a été perdu');
                     });
-                    console.log($rootScope.lol);
                     $rootScope.lol++;
                 }
             }
