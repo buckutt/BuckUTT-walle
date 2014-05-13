@@ -27,7 +27,7 @@
                         <div class="bu-user-infos">
                             <strong class="name">{{ buyer.firstname }} {{ buyer.lastname }}</strong><br />
                             <small class="surname">BDE {{ buyer.nickname }}</small><br />
-                            <span class="bu-credit">{{ buyer.credit/100 }} €</span>
+                            <span class="bu-credit">{{ (buyer.credit/100).toFixed(2) }} €</span>
                         </div>
                     </div>
 
@@ -48,7 +48,7 @@
                                         <div class="item-promo-content-name" ng-repeat="promoProduct in item.content track by $index">{{promoProduct.obj_name}}</div>
                                     </div>
                                     <div class="item-price">
-                                        {{ (item.quantity*item.product.price).toFixed(2)/100 }} €
+                                        {{ ((item.quantity*item.product.price).toFixed(2)/100).toFixed(2) }} €
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                     {{ product.obj_name }}
                                 </div>
                                 <div class="item-price">
-                                    {{ product.price/100 }} €
+                                    {{ (product.price/100).toFixed(2) }} €
                                 </div>
                             </div>
                         </div>
