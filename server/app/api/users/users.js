@@ -182,33 +182,37 @@ users.users = function(container){
 					var user = users.getUserById(user_id);
 					var data = rows[0];
 
+					var session_number = 0;
 					if (user != null){
-						//Update login time
-						user.login_time = new Date().getTime()
+						//Memorize session numer
+						session_number = user.inst;
+						//Delete user object
+						users.userlist.splice(users.userlist.indexOf(user), 1);
 					}
-					else
-					{
-						var user = {
-							id: user_id,
-							password: data.usr_pwd,						
-							firstname: data.usr_firstname,
-							lastname: data.usr_lastname,
-							nickname: data.usr_nickname,
-							mail: data.usr_mail,
-							rights: rights,
-							credit: data.usr_credit,
-							img_id: data.img_id,
-							rights: rights,
-							temporary: 0,
-							fail_auth: data.usr_fail_auth,
-							blocked: data.usr_blocked,
-							point_id: req.params.point_id,
-							logged: false,
-							inst: 0,
-							login_time: new Date().getTime()
-						};		
-						users.userlist.push(user);;								
-					}
+					
+					var user = {
+						id: user_id,
+						password: data.usr_pwd,						
+						firstname: data.usr_firstname,
+						lastname: data.usr_lastname,
+						nickname: data.usr_nickname,
+						mail: data.usr_mail,
+						rights: rights,
+						credit: data.usr_credit,
+						img_id: data.img_id,
+						rights: rights,
+						temporary: 0,
+						fail_auth: data.usr_fail_auth,
+						blocked: data.usr_blocked,
+						point_id: req.params.point_id,
+						logged: false,
+						inst: session_number,
+						login_time: new Date().getTime()
+					};	
+
+					//Create user object
+					users.userlist.push(user);;								
+					
 
 
 					res.json({
