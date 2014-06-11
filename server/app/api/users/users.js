@@ -211,7 +211,6 @@ users.users = function(container){
 						users.userlist.push(user);;								
 					}
 
-
 					res.json({
 						id: user_id,
 						firstname: data.usr_firstname,
