@@ -184,7 +184,8 @@ users.users = function(container){
 
 					if (user != null){
 						//Update login time
-						user.login_time = new Date().getTime()
+						user.login_time = new Date().getTime();
+						user.credit = data.usr_credit;
 					}
 					else
 					{
