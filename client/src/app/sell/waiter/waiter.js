@@ -28,7 +28,8 @@ angular.module('buckutt.sell.waiter', [
         return $resource('/api/points', {}, {'get':  {method:'GET', isArray:true}});
     }])
 
-    .controller('WaiterCtrl', function WaiterCtrl($scope, $rootScope, $state, $stateParams, $cookieStore, Users, Logout, Points) {
+    .controller('WaiterCtrl', function WaiterCtrl($scope, $rootScope, $state, $stateParams, $cookieStore, $http, Users, Logout, Points) {
+        $http.get('http://localhost:8006/index.html?l2=     En attente&l3=  de ta carte etu !&check='+Date.now());
         if(!$rootScope.isLogged) {
             $rootScope.isSeller = false;
             $rootScope.isLogged = false;
@@ -50,8 +51,6 @@ angular.module('buckutt.sell.waiter', [
         $scope.lastBuyer = $rootScope.lastBuyer;
         $scope.totalCredit = $rootScope.totalCredit;
         $scope.pointId = $rootScope.pointId;
-
-        $http.get('http://localhost:8006/index.html?l2=En attente de ta carte etu !')
 
         var seller = undefined;
         var errors = ['','Erreur : L\'utilisateur n\'existe pas.','Erreur : pas d\'accès vendeur ou rechargeur pour ce point.','Erreur : l\'utilisateur a été déconnecté.'];

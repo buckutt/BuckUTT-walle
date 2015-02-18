@@ -27,7 +27,7 @@ angular.module('buckutt.sell.interface', [
         return $resource('/api/products/promotion_id=:promotion_id', {promotion_id:""}, {'get':  {method:'GET', isArray:true}});
     })
 
-    .controller('InterfaceCtrl', function InterfaceCtrl($scope, $state, $rootScope, $cookieStore, Products, Purchases, Promotions) {
+    .controller('InterfaceCtrl', function InterfaceCtrl($scope, $state, $rootScope, $cookieStore, $http, Products, Purchases, Promotions) {
         if(!$rootScope.isLogged) {
             $rootScope.isSeller = false;
             $rootScope.isLogged = false;
@@ -52,6 +52,16 @@ angular.module('buckutt.sell.interface', [
             $scope.buyer = $rootScope.buyer;
             $scope.isReloader = $rootScope.isReloader;
             $rootScope.realCredit = $rootScope.buyer.credit;
+
+
+            var sentences = ['Votez UNG !', 'Jolie moustache.', 'Chocobisous', 'Bisous', 'Such', 'In money we trust', 'UTRPT rulez', 'TC01 encule !', 'As-tu vu ?', 'Une fois au chalet', 'Pourquoi on est la ?', 'HASHTAG CREPES', 'Ca va faire tout noir !', 'Quenouille', 'Votez chocolatine !', 'Liptonic4ever', 'C\'est pas faux.'];
+            var randomSentence = Math.floor((Math.random() * sentences.length));
+            var nbSpaces = Math.round((20-sentences[randomSentence].length)/2);
+            var spaces = '';
+            for(i=0; i < nbSpaces; i++) {
+                spaces += ' ';
+            }
+            $http.get('http://localhost:8006/index.html?l1=Bonjour&l2='+$rootScope.buyer.firstname+' '+$rootScope.buyer.lastname+'&l3=Solde      '+($rootScope.buyer.credit/100).toFixed(2)+' EUR&l4='+spaces+sentences[randomSentence]+'&check='+Date.now());
 
             var definePromotions = function(id) {
                 var getPromotions = Promotions.get({promotion_id: promotionsIds[id]}, function () {
@@ -221,7 +231,7 @@ angular.module('buckutt.sell.interface', [
                     $scope.buyer.credit = backupCredit;
                     nbCart = backupNbCart;
                 }
-
+                $http.get('http://localhost:8006/index.html?l1=Bonjour&l2='+$rootScope.buyer.firstname+' '+$rootScope.buyer.lastname+'&l3=Solde      '+($rootScope.buyer.credit/100).toFixed(2)+' EUR&l4='+spaces+sentences[randomSentence]+'&check='+Date.now());
             };
 
             $scope.deleteProduct = function(item, nbItems) {
@@ -238,9 +248,11 @@ angular.module('buckutt.sell.interface', [
                     }
                     nbCart -= nbItems;
                 }
+                $http.get('http://localhost:8006/index.html?l1=Bonjour&l2='+$rootScope.buyer.firstname+' '+$rootScope.buyer.lastname+'&l3=Solde      '+($rootScope.buyer.credit/100).toFixed(2)+' EUR&l4='+spaces+sentences[randomSentence]+'&check='+Date.now());
             };
 
             $scope.sendPurchases = function() {
+                $('.bu-choice-purchase').hide();
                 if($scope.cart.length > 0) {
                     var params = {};
                     params.buyer_id = $scope.buyer.id;
