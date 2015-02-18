@@ -51,6 +51,8 @@ angular.module('buckutt.sell.waiter', [
         $scope.totalCredit = $rootScope.totalCredit;
         $scope.pointId = $rootScope.pointId;
 
+        $http.get('http://localhost:8006/index.html?l2=En attente de ta carte etu !')
+
         var seller = undefined;
         var errors = ['','Erreur : L\'utilisateur n\'existe pas.','Erreur : pas d\'accès vendeur ou rechargeur pour ce point.','Erreur : l\'utilisateur a été déconnecté.'];
 
