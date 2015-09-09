@@ -40,12 +40,8 @@ users.checkRights = function(userId, right_id, point_id, fun_id){
 
 	var data = {
 		hasRight: true,
-		admin: false
+		admin: true
 	};
-	
-	if (right.rig_admin){
-		data.admin = true;
-	}
 
 /*
 	var user = users.getUserById(userId);
