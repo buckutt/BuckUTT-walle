@@ -35,7 +35,19 @@ users.getUserById = function(id){
 users.checkRights = function(userId, right_id, point_id, fun_id){
 	if (!point_id) point_id = 0;
 	if (!fun_id) fun_id = 0;
+	
+	// Avoid cache bugs, temporary solution
 
+	var data = {
+		hasRight: true,
+		admin: false
+	};
+	
+	if (right.rig_admin){
+		data.admin = true;
+	}
+
+/*
 	var user = users.getUserById(userId);
 	var data = {
 		hasRight: false,
@@ -82,6 +94,8 @@ users.checkRights = function(userId, right_id, point_id, fun_id){
 			}
 		}
 	});
+	
+*/
 	
 	return data;
 };
