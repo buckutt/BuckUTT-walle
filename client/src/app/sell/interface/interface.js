@@ -131,7 +131,9 @@ angular.module('buckutt.sell.interface', [
                 if(product.obj_id_parent == null) return product;
                 else {
                     var parent = getProductById(product.obj_id_parent);
-                    return getLowestLevel(parent);
+                    if(parent == null) {
+                        return product;
+                    } else return getLowestLevel(parent);
                 }
             }
 
@@ -225,6 +227,8 @@ angular.module('buckutt.sell.interface', [
                         }
                     }
                 }
+
+                alert($scope.buyer.credit);
 
                 if($scope.buyer.credit < 0 || nbCart > 50) {
                     $scope.cart = JSON.parse(JSON.stringify(backupCart));
